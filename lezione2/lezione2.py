@@ -36,3 +36,4 @@ famous_person: str = "PopX"
 quote: str = "Sono io u femminiell, u femminiell de papà"
 message: str = f"{famous_person} once said, \"{quote}\""
 print(message)
+
