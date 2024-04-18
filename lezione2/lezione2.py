@@ -57,3 +57,15 @@ names: list = ["Luca", "Giovanni", "Mariele"]
 #   but each message should be personalized with the person’s name.
 [print(f"Ciao {_}, come stai?") for _ in names]
 
+#   3-3. Your Own List: Think of your favorite mode of transportation,
+#   such as a motorcycle or a car, and make a list that stores several examples.
+#   Use your list to print a series of statements about these items,
+#   such as “I would like to own a Honda motorcycle.”
+vehicle = ["treno", "auto", "scooter"]
+examples = ["Mi piacciono i nuovi hitachi molto moderni come treni", 
+            "Adoro le citycar le puoi parcheggiare ovunque", 
+            "Che bello evitare il traffico col motorino"]
+[print(f"{vehicle[i]}: {examples[i]}") for i in range(len(vehicle))]
+
+
+
