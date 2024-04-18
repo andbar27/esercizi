@@ -46,6 +46,7 @@ filename: str = "python_notes.txt"
 filename_withoutsuffix: str = filename.removesuffix(".txt")
 print(filename_withoutsuffix)
 
+
 #   3-1. Names: Store the names of a few of your friends in a list called names.
 #   Print each person’s name by accessing each element in the list, one at a time.
 names: list = ["Luca", "Giovanni", "Mariele"]
@@ -66,6 +67,13 @@ examples = ["Mi piacciono i nuovi hitachi molto moderni come treni",
             "Adoro le citycar le puoi parcheggiare ovunque", 
             "Che bello evitare il traffico col motorino"]
 [print(f"{vehicle[i]}: {examples[i]}") for i in range(len(vehicle))]
+
+#   3-4. Guest List: If you could invite anyone, living or deceased,
+#   to dinner, who would you invite? Make a list that includes at least three 
+#   people you’d like to invite to dinner. Then use your list to print a message
+#   to each person, inviting them to dinner.
+guest = ["Da Vinci", "De Rossi", "Di Ventura"]
+[print(f"Ciao {_}, vie a cena dai") for _ in guest]
 
 
 
