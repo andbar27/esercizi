@@ -133,10 +133,10 @@ for i in range(len(invited)-2):
 for g in guest:
     print(f"{g}, sei ancora invitato, daje")
 del(guest)
-try:
-    print(guest)
-except EmptyList: # type: ignore
-    print("la lista è vuota")
+# try:
+#     print(guest)
+# except ValueError:
+#     print("la lista è vuota")
 
 """
 3-8. Seeing the World: Think of at least five places in the world you’d like to visit.
@@ -155,15 +155,31 @@ except EmptyList: # type: ignore
 • Use sort() to change your list so it’s stored in alphabetical order. 
     Print the list to show that its order has been changed.
 • Use sort() to change your list so it’s stored in reverse-alphabetical order.
-Print the list to show that its order has changed.
+    Print the list to show that its order has changed.
 """
 places = ["Lucca", "Rieti", "Pisa", "Ravenna", "Milano"]
+print(places)
+print(sorted(places))
+print(places)
+print(sorted(places, reverse=True))
+print(places)
+places.reverse()
+print(places)
+places.reverse()
+print(places)
+places.sort()
+print(places)
+places.sort(reverse=True)
+print(places)
 
 """
 3-9. Dinner Guests: Working with one of the programs from Exercises 3, 
 use len() to print a message indicating the number of people you’re inviting to dinner.
 """
-
+guest = ["Da Vinci", "De Rossi", "Di Ventura"]
+invited = [f"Ciao {_}, vieni a cena dai" for _ in guest]
+print(invited)
+print(f"numero invitati: {len(invited)}")
 
 """
 3-10. Every Function: Think of things you could store in a list. 
@@ -171,4 +187,33 @@ For example, you could make a list of mountains, rivers, countries, cities, lang
 or anything else you’d like. Write a program that creates a list containing these items 
 and then uses each function introduced in this chapter at least once.
 """
-
+flag = True
+myList = []
+print("type exit() to exit")
+while(flag):
+    data = input()
+    if(data == "exit()"):
+        flag = False
+        continue
+    if(data[0] == 'a'):
+        data.capitalize()
+    elif(data[0] == 'b'):
+        data.upper()
+    else:
+        data.lower()
+    if(data.find(".txt") != -1):
+        data.removesuffix(".txt")
+    if(data.find("merda") != -1):
+        data.replace("merda", "cacca")
+    if(data[0] == "z"):
+        myList.append(data)
+    else:
+        myList.insert(data)
+    print(data)
+print(myList)    
+tempList = sorted(myList)
+if(tempList[0][0] == "r"):
+    myList.reverse()
+else:
+    myList.sort()
+print(myList)  
