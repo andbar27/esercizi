@@ -7,6 +7,12 @@ def check_value(n: int):
     else: ret = "maggiore di 5"
     print(ret)
 
+def check_value2  (n: int, check: int):
+    if(n < check): ret = "minore di 5" 
+    elif(n == check): ret = "uguale a 5" 
+    else: ret = "maggiore di 5"
+    print(ret)
+
 def check_length(s: str):
     l = len(s)
     if(l < 10): ret = "minore di 10" 
