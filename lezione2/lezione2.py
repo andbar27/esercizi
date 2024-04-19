@@ -208,7 +208,7 @@ while(flag):
     if(data[0] == "z"):
         myList.append(data)
     else:
-        myList.insert(data)
+        myList.insert(0, data)
     print(data)
 print(myList)    
 tempList = sorted(myList)
@@ -216,4 +216,143 @@ if(tempList[0][0] == "r"):
     myList.reverse()
 else:
     myList.sort()
-print(myList)  
+print(myList)
+
+"""
+6-1. Person: Use a dictionary to store information about a person you know. 
+Store their first name, last name, age, and the city in which they live. 
+You should have keys such as first_name, last_name, age, and city. 
+Print each piece of information stored in your dictionary.
+"""
+amico: dict = {}
+amico["first_name"] = "Simone"
+amico["last_name"] = "Ticcone"
+amico["age"] = 22
+amico["city"] = "Guidonia"
+print(amico)
+
+"""
+6-2. Favorite Numbers: Use a dictionary to store people’s favorite numbers. 
+Think of five names, and use them as keys in your dictionary. 
+Think of a favorite number for each person, and store each as a value in your dictionary. 
+Print each person’s name and their favorite number. 
+For even more fun, poll a few friends and get some actual data for your program.
+"""
+amicifn: dict = {}
+amicifn["Giorgio"] = 14
+amicifn["Flaminia"] = 8
+amicifn["Simone"] = 11
+amicifn["Nicola"] = 0
+amicifn["Andrea"] = 27
+[print(f"Ciao sono {key}, il mio numero prefe è {value}") for key, value in amicifn.items()]
+
+"""
+6-3. Glossary: A Python dictionary can be used to model an actual dictionary. 
+However, to avoid confusion, let’s call it a glossary.
+• Think of five programming words you’ve learned about in the previous chapters. 
+    Use these words as the keys in your glossary, and store their meanings as values.
+• Print each word and its meaning as neatly formatted output. 
+    You might print the word followed by a colon and then its meaning, 
+    or print the word on one line and then print its meaning indented on a second line. 
+    Use the newline character (\n) to insert a blank line between each word-meaning 
+    pair in your output.
+"""
+gloss: dict = {}
+gloss["Glossary"] = """A Python dictionary can be used to model an actual dictionary. 
+However, to avoid confusion, let’s call it a glossary.
+• Think of five programming words you’ve learned about in the previous chapters. 
+    Use these words as the keys in your glossary, and store their meanings as values.
+• Print each word and its meaning as neatly formatted output. 
+"""
+gloss["Numbers"] = """Use a dictionary to store people’s favorite numbers. 
+Think of five names, and use them as keys in your dictionary. 
+Think of a favorite number for each person, and store each as a value in your dictionary."""
+gloss["Person"] = """Use a dictionary to store information about a person you know. 
+Store their first name, last name, age, and the city in which they live. 
+You should have keys such as first_name, last_name, age, and city. 
+Print each piece of information stored in your dictionary."""
+gloss["Function"] = """Think of things you could store in a list. 
+For example, you could make a list of mountains, rivers, countries, cities, languages, 
+or anything else you’d like. Write a program that creates a list containing these items 
+and then uses each function introduced in this chapter at least once."""
+gloss["World"] = """Think of at least five places in the world you’d like to visit.
+• Store the locations in a list. Make sure the list is not in alphabetical order.
+• Print your list in its original order. Don’t worry about printing the list neatly; 
+    just print it as a raw Python list."""
+for key, value in gloss.items():
+    print(f"{key}: \n")
+    for row in value.split("\n"):
+        print(f"\t{row}")
+
+"""
+6-7. People: Start with the program you wrote for Exercise 6-1. 
+Make two new dictionaries representing different people, 
+and store all three dictionaries in a list called people. 
+Loop through your list of people. As you loop through the list, 
+print everything you know about each person.
+"""
+amico1: dict = {}
+amico1["first_name"] = "Simone"
+amico1["last_name"] = "Ticcone"
+amico1["age"] = 22
+amico1["city"] = "Guidonia"
+amico2: dict = {}
+amico2["first_name"] = "Luca"
+amico2["last_name"] = "Gini"
+amico2["age"] = 23
+amico2["city"] = "Mentana"
+amico3: dict = {}
+amico3["first_name"] = "Andrea"
+amico3["last_name"] = "Bradi"
+amico3["age"] = 24
+amico3["city"] = "Roma"
+people: list[dict] = [amico1, amico2, amico3]
+[print(str(friend).replace("{","").replace("}","\n").replace(",","\n")) for friend in people]
+"""
+6-8. Pets: Make several dictionaries, where each dictionary represents a different pet. 
+In each dictionary, include the kind of animal and the owner’s name. 
+Store these dictionaries in a list called pets. 
+Next, loop through your list and as you do, print everything you know about each pet. 
+"""
+gino = {"cane", "giorgio"}
+pino = {"gatto", "luca"}
+lino = {"pappagallo", "leo"}
+pets = [gino, lino, pino]
+[print(str(pet).replace("{","").replace("}","\n").replace(","," è di")) for pet in pets]
+"""
+6-9. Favorite Places: Make a dictionary called favorite_places. 
+Think of three names to use as keys in the dictionary, 
+and store one to three favorite places for each person. 
+To make this exercise a bit more interesting, 
+ask some friends to name a few of their favorite places. 
+Loop through the dictionary, and print each person’s name and their favorite places.
+"""
+print("\n")
+gino = {"cane", "roma"}
+pino = {"gatto", "lucca"}
+lino = {"pappagallo", "firenze"}
+pets = [gino, lino, pino]
+[print(str(pet).replace("{","").replace("}","\n").replace(","," piace")) for pet in pets]
+"""
+6-10. Favorite Numbers: Modify your program from Exercise 6-2 
+so each person can have more than one favorite number. 
+Then print each person’s name along with their favorite numbers.
+"""
+
+
+"""
+6-11. Cities: Make a dictionary called cities. Use the names of three cities 
+as keys in your dictionary. Create a dictionary of information about each city 
+and include the country that the city is in, its approximate population, 
+and one fact about that city. The keys for each city’s dictionary should 
+be something like country, population, and fact. Print the name of each city 
+and all of the information you have stored about it.
+"""
+
+
+"""
+6-12. Extensions: We’re now working with examples that are complex enough 
+that they can be extended in any number of ways. Use one of the example 
+programs from this chapter, and extend it by adding new keys and values, 
+changing the context of the program, or improving the formatting of the output.
+"""
