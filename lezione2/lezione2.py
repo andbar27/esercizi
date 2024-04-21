@@ -291,6 +291,11 @@ and store all three dictionaries in a list called people.
 Loop through your list of people. As you loop through the list, 
 print everything you know about each person.
 """
+def printLDict(ld):
+    for elem in ld:
+        for key, value in elem.items():
+            print(f"{key}: {value}")
+        print()
 amico1: dict = {}
 amico1["first_name"] = "Simone"
 amico1["last_name"] = "Ticcone"
@@ -307,18 +312,21 @@ amico3["last_name"] = "Bradi"
 amico3["age"] = 24
 amico3["city"] = "Roma"
 people: list[dict] = [amico1, amico2, amico3]
-[print(str(friend).replace("{","").replace("}","\n").replace(",","\n")) for friend in people]
+printLDict(people)
 """
 6-8. Pets: Make several dictionaries, where each dictionary represents a different pet. 
 In each dictionary, include the kind of animal and the owner’s name. 
 Store these dictionaries in a list called pets. 
 Next, loop through your list and as you do, print everything you know about each pet. 
 """
-gino = {"cane", "giorgio"}
-pino = {"gatto", "luca"}
-lino = {"pappagallo", "leo"}
+gino: dict = {}
+pino: dict = {}
+lino: dict = {}
+gino["cane"] = "giorgio"
+pino["gatto"] = "luca"
+lino["pappagallo"] = "leo"
 pets = [gino, lino, pino]
-[print(str(pet).replace("{","").replace("}","\n").replace(","," è di")) for pet in pets]
+printLDict(pets)
 """
 6-9. Favorite Places: Make a dictionary called favorite_places. 
 Think of three names to use as keys in the dictionary, 
@@ -328,16 +336,26 @@ ask some friends to name a few of their favorite places.
 Loop through the dictionary, and print each person’s name and their favorite places.
 """
 print("\n")
-gino = {"cane", "roma"}
-pino = {"gatto", "lucca"}
-lino = {"pappagallo", "firenze"}
-pets = [gino, lino, pino]
-[print(str(pet).replace("{","").replace("}","\n").replace(","," piace")) for pet in pets]
+gino: dict = {}
+pino: dict = {}
+lino: dict = {}
+gino["pino"] = "roma"
+pino["gino"] = "venezia"
+lino["lino"] = "firenze"
+favorite_places: list[dict] = [pino, gino, lino]
+printLDict(favorite_places)
 """
 6-10. Favorite Numbers: Modify your program from Exercise 6-2 
 so each person can have more than one favorite number. 
 Then print each person’s name along with their favorite numbers.
 """
+amicifn: dict = {}
+amicifn["Giorgio"] = [14, 16]
+amicifn["Flaminia"] = [8, 9]
+amicifn["Simone"] = [11, 10]
+amicifn["Nicola"] = [0, 1]
+amicifn["Andrea"] = [27, 12]
+[print(f"Ciao sono {key}, il miei numero prefe sono {value}") for key, value in amicifn.items()]
 
 
 """
@@ -348,7 +366,35 @@ and one fact about that city. The keys for each city’s dictionary should
 be something like country, population, and fact. Print the name of each city 
 and all of the information you have stored about it.
 """
+roma: dict = {}
+roma["country"] = "Italia"
+roma["population"] = "3 milioni"
+roma["info"] = "caput mundi"
+milano: dict = {}
+milano["country"] = "Italia"
+milano["population"] = "2 milioni"
+milano["info"] = "solo la nebbia"
+venezia: dict = {
+    "country": "Italia",
+    "population": "1 milione",
+    "info": "molta acqua"
+}
+cities: dict = {}
+cities["roma"] = roma
+cities["milano"] = milano
+cities["venezia"] = venezia
+for key, value in cities.items():
+    print(f"{key}: --------------")
+    for key1, value1 in value.items():
+        print(f"{key1}: {value1}")
+    print("---------------------")
 
+def printDictofDict(dd):
+    for key, value in dd.items():
+        print(f"{key}: --------------")
+        for key1, value1 in value.items():
+            print(f"{key1}: {value1}")
+        print("---------------------")
 
 """
 6-12. Extensions: We’re now working with examples that are complex enough 
@@ -356,3 +402,12 @@ that they can be extended in any number of ways. Use one of the example
 programs from this chapter, and extend it by adding new keys and values, 
 changing the context of the program, or improving the formatting of the output.
 """
+def printDictofDict(dd):
+    for key, value in dd.items():
+        print(f"{key}: \t --------")
+        for key1, value1 in value.items():
+            print(f"{key1}: {value1}")
+        print("-------------------------")
+monterotondo = dict(country = "Italia", population = "40 mila", info = "ce stai una vita nte fai n'amico")
+cities["monterotondo"]= monterotondo
+printDictofDict(cities)
