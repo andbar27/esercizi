@@ -355,8 +355,11 @@ amicifn["Flaminia"] = [8, 9]
 amicifn["Simone"] = [11, 10]
 amicifn["Nicola"] = [0, 1]
 amicifn["Andrea"] = [27, 12]
-[print(f"Ciao sono {key}, il miei numero prefe sono {value}") for key, value in amicifn.items()]
-
+for key, value in amicifn.items():
+    print(f"Ciao sono {key}, il miei numero prefe sono ", end="")
+    for elem in value:
+        print(elem, end=" ")
+    print()
 
 """
 6-11. Cities: Make a dictionary called cities. Use the names of three cities 
