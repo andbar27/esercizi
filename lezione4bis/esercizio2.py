@@ -17,7 +17,7 @@ def lenLastWorld(s: str):
 print(lenLastWorld("hello world    baby"))
 print(lenLastWorld("hello world         "))
 
-def lenLastWorld(s: str):
+def lenght_of_last_word(s: str) -> int:
     return len(s.strip().split(" ")[-1])
 
 print(lenLastWorld("hello world    baby"))
