@@ -17,7 +17,7 @@ def convert_to_title(col_number: int) -> str:
     while(col_number > 0):
         resto = (col_number -1) % 26
         ret = excel[resto] + ret
-        col_number = (col_number -1) // 26
+        col_number = (col_number - 1) // 26
     return ret
 
 print(convert_to_title(26))
@@ -26,4 +26,8 @@ print(convert_to_title(27))
 
 print(convert_to_title(28))
 
-print(convert_to_title(701))
+print(convert_to_title(703))
+
+print(convert_to_title(729))
+
+print(convert_to_title(19657))

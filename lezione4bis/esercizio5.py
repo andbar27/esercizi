@@ -7,3 +7,7 @@ def move_zeroes(nums: list[int]):
 nums = [0,1,0,3,12]
 move_zeroes(nums)
 print(nums)
+
+nums = [1,0,1,0,3,0,0,0,11,12]
+move_zeroes(nums)
+print(nums)
