@@ -6,7 +6,7 @@ def majority_element(l: list[int]) -> int:
     for n in l:
         if(i > lenght//2):
             return(None)
-        if(lt.count(n)):
+        if(lt.count(n)):    #diverso da 0
             continue
         if(l.count(n) > lenght // 2):
             return(n)
