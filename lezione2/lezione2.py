@@ -133,10 +133,10 @@ for i in range(len(invited)-2):
 for g in guest:
     print(f"{g}, sei ancora invitato, daje")
 del(guest)
-# try:
-#     print(guest)
-# except ValueError:
-#     print("la lista è vuota")
+try:
+    print(guest)
+except Exception:
+    print("la lista è vuota")
 
 """
 3-8. Seeing the World: Think of at least five places in the world you’d like to visit.
