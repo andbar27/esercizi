@@ -291,7 +291,7 @@ def averageScore(student: str, scores: list[int]) -> int:
     Terminate the loop when the user guesses the number correctly or reaches the maximum 
     number of attempts.
 """
-def numberGames(maxNum: int, attempts: int): 
+def numberGame(maxNum: int, attempts: int): 
     import random
     generateNumber = random.randint(0, maxNum)
     for attempt in range(attempts):
@@ -299,6 +299,10 @@ def numberGames(maxNum: int, attempts: int):
         if(tryNum == generateNumber):
             print(f"You got the number!! Is {tryNum}")
             return
+        elif(tryNum > generateNumber):
+            print("Too high")
+        else:
+            print("Too low")
     print("Finish attempts.")
 
 """
@@ -311,7 +315,31 @@ def numberGames(maxNum: int, attempts: int):
     Implement a for loop to iterate over the items in the cart and print detailed 
     information about each product and the total.
 """
+def product(name: str, price: float, quantity: int) -> dict: 
+    return {"product": name, "price": price, "quantity": quantity}
 
+def shoppingCart_add(cart: list[dict], product: dict):
+    for product_in_cart in cart:
+        if(product_in_cart["product"] == product["product"]):
+            product_in_cart["quantity"] += product["quantity"]
+            break
+    cart.append(product)
+
+def shoppingCart_remove(cart: list[dict], product: dict):
+    if(product in cart):
+        cart.remove(product)
+
+def shoppingCart_info(cart: list[dict]):
+    for elem in cart:
+        for key, value in elem.items():
+            print(f"{key}: {value}")
+        print()
+
+def shoppingCart_total(cart: list[dict]):
+    total: float = 0
+    for product in cart:
+        total += (product["quantity"] * product["price"])
+    print("Total: ", total)
 """
 4. Text Analysis:
     Create a function that reads a text file and counts the number of occurrences of each 
