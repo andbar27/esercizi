@@ -273,6 +273,13 @@ School Grading System:
     Create a for loop to iterate over a list of students and scores, calling the function 
     for each student.
 """
+def averageScore(student: str, scores: list[int]) -> int:
+    average = sum(scores) // len(scores)
+    print(f"{student}'s average: {average}")
+    if(average >= 60):
+        print("Passed the Exam")
+    else:
+        print("Fallied the Exam")
 
 """
 2. Guess the Number Game:
@@ -284,6 +291,15 @@ School Grading System:
     Terminate the loop when the user guesses the number correctly or reaches the maximum 
     number of attempts.
 """
+def numberGames(maxNum: int, attempts: int): 
+    import random
+    generateNumber = random.randint(0, maxNum)
+    for attempt in range(attempts):
+        tryNum = int(input("try to got the number: "))
+        if(tryNum == generateNumber):
+            print(f"You got the number!! Is {tryNum}")
+            return
+    print("Finish attempts.")
 
 """
 3. E-commerce Shopping Cart:
