@@ -234,3 +234,20 @@ def print_shopping_list(shoppingDict: dict, storeName: str):
 
 myShopList = create_shopping_list("Grocery Store", {"Milk", "Eggs", "Bread"})
 print_shopping_list(myShopList, "Grocery Store")
+
+def visiting_tree_iterative(tree: dict[int, list[int]], root: int):
+    stack: list[int] = [root]
+    liv = 0
+    while stack: # while len(stack) != 0
+        curr_node = stack.pop(0)
+        if curr_node:
+            print(curr_node)
+            left_child, right_child = tree[curr_node]
+            if left_child:
+                stack.append(left_child)
+            if right_child:
+                stack.append(right_child)
+        
+
+tree = {1:[2,3], 2:[4,8], 3:[None,7], 4:[5,6], 5:[None,None], 6:[None,None], 7:[None,None], 8:[None,None]}
+visiting_tree_iterative(tree, 1)
