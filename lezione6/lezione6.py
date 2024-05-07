@@ -66,12 +66,12 @@ class Student:
     def printInfo(self):
         print(f"{self.name}: {self.studyProgram} - age {self.age} - gender {self.gender}")
 
-andrea = Student("Andrea", "FullStack", 27, "M")
-luca = Student("Luca", "Fullstack", 22, "M")
-pino = Student("Pino", "Fullstack", 32, "F")
+# andrea = Student("Andrea", "FullStack", 27, "M")
+# luca = Student("Luca", "Fullstack", 22, "M")
+# pino = Student("Pino", "Fullstack", 32, "F")
 
-for student in [andrea, luca, pino]:
-    student.printInfo()
+# for student in [andrea, luca, pino]:
+#     student.printInfo()
 
 class Animal:
     
@@ -88,16 +88,72 @@ class Animal:
     def __str__(self):
         return f"{self.name}: {self.legs}"
     
-tigre = Animal("Tigre", 4)
-foca = Animal("Foca", 1)
+# tigre = Animal("Tigre", 4)
+# foca = Animal("Foca", 1)
 
-for animal in [tigre, foca]:
-    print(animal.name)
+# for animal in [tigre, foca]:
+#     print(animal.name)
 
-foca.legs = 2
-print(foca.legs)
-foca.setLegs(0)
-print(foca.getLegs())
+# foca.legs = 2
+# print(foca.legs)
+# foca.setLegs(0)
+# print(foca.getLegs())
 
-for animal in [foca, tigre]:
-    print(animal)
+# for animal in [foca, tigre]:
+#     print(animal)
+
+class Food:
+    def __init__(self, name, price, descr):
+        self.name = name
+        self.price = price
+        self.description = descr
+    
+    def __str__(self):
+        return f"{self.name}: {self.price} -\n\t{self.description}"
+
+pasta = Food("Pasta", 6, "Pasta di grano duro")
+pizza = Food("Pizza", 5, "Pizza napoletana")
+print(pasta)
+
+class Menu:
+    def __init__(self, foods: list[Food] = []):
+        self.foods = foods
+    
+    def addFood(self, food: Food):
+        if(food not in self.foods):
+            self.foods.append(food)
+    
+    def removeFood(self, food: Food):
+        if(food in self.foods):
+            self.foods.remove(food)
+
+    def printPrices(self):
+        for food in self.foods:
+            print(food.price)
+    
+    def getAveragePrice(self):
+        avg = 0
+        count = 0
+        for food in self.foods:
+            avg += food.price
+            count += 1
+        return avg / count
+
+    
+    def __str__(self):
+        ret = ""
+        for food in self.foods:
+            ret += str(food)
+            ret += "\n"
+        return ret
+
+menu = Menu([pasta, pizza])
+print(menu)
+riso = Food("Riso", 3, "Riso basmati")
+menu.addFood(riso)
+print("\n", menu)
+menu.removeFood(riso)
+menu.removeFood(riso)
+print("\n", menu)
+menu.printPrices()
+print(menu.getAveragePrice())
