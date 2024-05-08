@@ -139,6 +139,7 @@ to 65 if it isn’t already. Make an electric car with a default battery size, c
 and then call get_range() a second time after upgrading the battery. You should see an increase in the 
 car’s range.
 """
+#   Dov'è electric_car.py ?
 
 """
 9-10. Imported Restaurant: Using your latest Restaurant class, store it in a module. Make a separate 
