@@ -5,6 +5,9 @@ prints these two pieces of information, and a method called open_restaurant() th
 indicating that the restaurant is open. Make an instance called restaurant from your class. 
 Print the two attributes individually, and then call both methods.
 """
+import random
+
+
 class Restaurant:
     def __init__(self, resturant_name: str, cuisine_type: str):
         self.resturant_name = resturant_name
@@ -72,22 +75,33 @@ that lets you increment the number of customers who’ve been served. Call this 
 you like that could represent how many customers were served in, say, a day of business. 
 """
 class Restaurant:
-    def __init__(self, resturant_name: str, cuisine_type: str):
+    def __init__(self, resturant_name: str, cuisine_type: str, open: bool = False):
         self.resturant_name = resturant_name
         self.cuisine_type = cuisine_type
         self.number_served = 0
+        self.open = open
     
     def describe_restaurant(self):
         print(f"{self.resturant_name}: {self.cuisine_type}")
     
-    def open_restuarant(self):
-        print("Is Open")
+    def open_restaurant(self):
+        print(f"{self.resturant_name} is Open")
+        self.open = True
     
+    def close_restaurant(self):
+        self.number_served = 0
+        self.open = False
+
     def set_number_served(self, nServed):
-        self.number_served = nServed
+        if self.open:
+            self.number_served = nServed
     
     def increment_number_served(self, increment = 1):
-        self.number_served += increment
+        if self.open:
+            self.number_served += increment
+    
+    def __str__(self):
+        return f"{self.resturant_name}: {self.cuisine_type} - served number: {self.number_served}"
 
 restaurant = Restaurant("Olbia", "Sarda")
 print(restaurant.number_served)
@@ -107,6 +121,8 @@ and then call reset_login_attempts(). Print login_attempts again to make sure it
 u4 = User("Dino", "Va", 22)
 u4.increment_login_attempts()
 u4.increment_login_attempts()
+print(u4.login_attempt)
+u4.reset_login_attempts()
 print(u4.login_attempt)
 
 """
@@ -146,6 +162,7 @@ car’s range.
 file that imports Restaurant. Make a Restaurant instance, and call one of Restaurant’s methods to show 
 that the import statement is working properly.
 """
+#   done, name file: useRestaurant.py
 
 """
 9-11. Imported Admin: Start with your work from Exercise 9-8. Store the classes User, Privileges, and 
@@ -157,6 +174,7 @@ Admin in one module. Create a separate file, make an Admin instance, and call sh
 in a separate module. In a separate file, create an Admin instance and call show_privileges() to show 
 that everything is still working correctly.
 """
+#   done, only User.py
 
 """
 9-13. Dice: Make a class Die with one attribute called sides, which has a default value of 6. Write a 
@@ -164,12 +182,43 @@ method called roll_die() that prints a random number between 1 and the number of
 Make a 6-sided die and roll it 10 times. Make a 10-sided die and a 20-sided die. Roll each die 10 
 times.
 """
+class Die:
+    def __init__(self, sides: int = 6):
+        self.sides = sides
+    
+    def roll_die(self):
+        return random.randint(1,self.sides) 
+
+d6 = Die()
+d10 = Die(sides=10)
+d20 = Die(sides=20)
+for i in range(10):
+    print("d6: ",d6.roll_die())
+    print("d10: ",d10.roll_die())
+    print("d20: ",d20.roll_die())
 
 """
 9-14. Lottery: Make a list or tuple containing a series of 10 numbers and 5 letters. Randomly select 
 4 numbers or letters from the list and print a message saying that any ticket matching these 4 numbers 
 or letters wins a prize.
 """
+lott_str = "a b c d e f g h i l 1 2 3 4 5"
+lottery_list = lott_str.split(" ")
+print(lottery_list)
+
+def ticket():
+    select = []
+    while len(select) < 4:
+        temp = random.randint(0,14)
+        if lottery_list[temp] not in select:
+            select.append(lottery_list[temp])
+    return select
+
+select = ticket()
+print(f"any ticket matching these 4 numbers wins a prize! {select}")
+select.sort()
+print(select)
+
 
 """
 9-15. Lottery Analysis: You can use a loop to see how hard it might be to win the kind of lottery you 
@@ -177,3 +226,18 @@ just modeled. Make a list or tuple called my_ticket. Write a loop that keeps pul
 your ticket wins. Print a message reporting how many times the loop had to run to give you a winning 
 ticket.
 """
+winner_ticket = ticket()
+winner_ticket.sort()
+print("winner_ticket ",winner_ticket)
+i = 1
+while True:
+    my_ticket = ticket()
+    my_ticket.sort()
+    print("my ticket ",my_ticket)
+    if(my_ticket == winner_ticket):
+        print("WIN!!!, attempts: ", i)
+        break
+    i += 1
+
+
+
