@@ -26,8 +26,9 @@ class Animal:
 class Fence:
     def __init__(self, animals: list[Animal] = [], area: float = 0,
                  temperature: float = 0, habitat: str = "Habitat"):
-        #self.animals = animals
-        self.animals = animals.copy()  #   serve verificare le condizioni
+        self.animals = animals
+        self.idList = id(self.animals)
+        #self.animals = animals.copy()  #   serve verificare le condizioni
         if area < 0: area = 0
         self.area = area
         self.temperature = temperature
@@ -123,6 +124,7 @@ class Zoo:
         
         return message
 
+"""
 a1 = Animal()
 a2 = Animal()
 zk1 = ZooKeeper()
@@ -154,3 +156,54 @@ zk1.add_animal(lion, lionFence)
 
 # print("\n\n")
 z1.describe_zoo()
+"""
+a1 = Animal(name="a1")
+a2 = Animal(name="a2")
+a3 = Animal(name="a3")
+a4 = Animal(name="a4")
+f1 = Fence()
+f2 = Fence()
+
+zk1 = ZooKeeper()
+zk1.add_animal(a1, f1)
+zk1.add_animal(a2, f1)
+zk1.add_animal(a3, f2)
+zk1.add_animal(a4, f2)
+
+flag = f1.idList == f2.idList
+print("id list f1 == f2 ",flag)
+
+f3 = Fence()
+print("id list f1 == f3 ",f3.idList == f1.idList)
+
+f4 = Fence()
+print("id list f4 == f3 ",f3.idList == f4.idList)
+
+#CLASSI E METODI UTILIZZATI
+"""
+class Fence:
+    def __init__(self, animals: list[Animal] = [], area: float = 0,
+                 temperature: float = 0, habitat: str = "Habitat"):
+        self.animals = animals
+        self.idList = id(self.animals)
+        if area < 0: area = 0
+        self.area = area
+        self.temperature = temperature
+        self.habitat = habitat
+"""
+"""
+class ZooKeeper:
+    def __init__(self, name: str = "Name", surname: str = "Surname", id: str = "Id"):
+        self.name = name
+        self.surname = surname
+        self.id = id
+    
+    def add_animal(self, animal: Animal, fence: Fence):
+        animalArea = animal.height * animal.width
+        if animal.preferred_habitat == fence.habitat:
+            if animalArea <= fence.area:
+                fence.area -= animalArea
+                fence.animals.append(animal)
+                animal.fence = fence
+        
+"""
