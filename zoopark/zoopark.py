@@ -207,3 +207,23 @@ class ZooKeeper:
                 animal.fence = fence
         
 """
+"""
+class Animal:
+    def __init__(self, name: str = "Animal", species: str = "Species", age: float = 0.0027,
+                 height: float = 0.0, width: float = 0.0,
+                 preferred_habitat: str = "Habitat"):
+        self.name = name
+        self.species = species
+        if(age <= 0): 
+            age = 0.0027 
+        self.age = age
+        if(height < 0): 
+            height = 0
+        self.height = height
+        if(width < 0): 
+            width = 0
+        self.width = width
+        self.preferred_habitat = preferred_habitat
+        self.health = round(100 * (1 / self.age), 3)
+        self.fence = None
+"""
