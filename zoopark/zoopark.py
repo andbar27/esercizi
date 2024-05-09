@@ -1,14 +1,17 @@
 class Animal:
     def __init__(self, name: str = "Animal", species: str = "Species", age: float = 0.0027,
-                 height: float = 0, width: float = 0,
+                 height: float = 0.0, width: float = 0.0,
                  preferred_habitat: str = "Habitat"):
         self.name = name
         self.species = species
-        if(age <= 0): age = 0.0027 
+        if(age <= 0): 
+            age = 0.0027 
         self.age = age
-        if(height < 0): height = 0
+        if(height < 0): 
+            height = 0
         self.height = height
-        if(width < 0): width = 0
+        if(width < 0): 
+            width = 0
         self.width = width
         self.preferred_habitat = preferred_habitat
         self.health = round(100 * (1 / self.age), 3)
@@ -16,14 +19,15 @@ class Animal:
 
     def __str__(self) -> str:
         message = f"name: {self.name} - species: {self.species} - age: {self.age}" \
-        + f"height: {self.height}  width: {self.width} - habitat: {self.preferred_habitat}" \
+        + f" height: {self.height}  width: {self.width} - habitat: {self.preferred_habitat}" \
         + f" - health: {self.health}"
         return message
 
 class Fence:
     def __init__(self, animals: list[Animal] = [], area: float = 0,
                  temperature: float = 0, habitat: str = "Habitat"):
-        self.animals = animals  #   serve verificare le condizioni
+        #self.animals = animals
+        self.animals = animals.copy()  #   serve verificare le condizioni
         if area < 0: area = 0
         self.area = area
         self.temperature = temperature
@@ -59,8 +63,8 @@ class ZooKeeper:
             animal.fence = None
 
     def feed(self, animal: Animal):
-        tempHeight = animal.height / 100 * 2
-        tempWidth = animal.width / 100 * 2
+        tempHeight = animal.height + (animal.height / 100 * 2)
+        tempWidth = animal.width + (animal.width / 100 * 2)
         tempAnimalArea = tempHeight * tempWidth
         animalArea = animal.height * animal.width
         diffAnimalArea = tempAnimalArea - animalArea
@@ -72,6 +76,8 @@ class ZooKeeper:
             animal.height = tempHeight
             animal.width = tempWidth
             animal.health += (animal.health / 100)
+        else:
+            print(f"The animal {animal.name} is too big for feed it")
 
 
     def clean(self, fence: Fence):
@@ -80,6 +86,7 @@ class ZooKeeper:
         for animal in animals:
             areaAnimal = animal.height * animal.width
             totalAnimalArea += areaAnimal
+            print(f"tempArea: {animal} - {animal.height} {animal.width} {totalAnimalArea}")
         if fence.area == 0:
             return totalAnimalArea
         areaRatio = totalAnimalArea / fence.area
@@ -110,7 +117,7 @@ class Zoo:
         for fence in self.fences:
             message += f"\t\t{fence}\t\t" + sepFence
         
-        message += "\n\tlist of zookeepers:\n"
+        message += "\n\tList of Zookeepers:\n"
         for zookeeper in self.zookeepers:
             message += f"\t\t{zookeeper}\n"
         
@@ -123,4 +130,27 @@ f1 = Fence()
 z1 = Zoo(fences=[f1], zookeepers=[zk1])
 zk1.add_animal(a1, f1)
 zk1.add_animal(a2, f1)
+z1.describe_zoo()
+#Done
+#print(zk1.clean(f1))
+zk1.feed(a1)
+#print(a1)
+#Done
+print("\n\n")
+lion = Animal(name = "Leo", species = "Lion", age = 2, height = 4, width = 3)
+lionFence = Fence(area = 12.0)
+print("created lionFence: \n", lionFence, "\n\n")
+# print("clean1: ",zk1.clean(lionFence))
+print("add lion to lionFence\n")
+zk1.add_animal(lion, lionFence)
+# print("clean2 (after add): ",zk1.clean(lionFence))
+# print(lion)
+# print("feed")
+# zk1.feed(lion)
+
+# print(zk1.clean(lionFence))
+# print(lion)
+# print("clean4: ",zk1.clean(lionFence))
+
+# print("\n\n")
 z1.describe_zoo()
