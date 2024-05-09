@@ -1,14 +1,16 @@
 class Animal:
-    def __init__(self, name: str = "", species: str = "", age: float = 0.0027,
+    def __init__(self, name: str = "Animal", species: str = "Species", age: float = 0.0027,
                  height: float = 0, width: float = 0,
-                 preferred_habitat: str = ""):
+                 preferred_habitat: str = "Habitat"):
         self.name = name
         self.species = species
+        if(age <= 0): age = 0.0027 
         self.age = age
+        if(height < 0): height = 0
         self.height = height
+        if(width < 0): width = 0
         self.width = width
         self.preferred_habitat = preferred_habitat
-        if(age == 0): age = 0.0027
         self.health = round(100 * (1 / self.age), 3)
         self.fence = None
 
@@ -20,8 +22,9 @@ class Animal:
 
 class Fence:
     def __init__(self, animals: list[Animal] = [], area: float = 0,
-                 temperature: float = 0, habitat: str = ""):
-        self.animals = animals
+                 temperature: float = 0, habitat: str = "Habitat"):
+        self.animals = animals  #   serve verificare le condizioni
+        if area < 0: area = 0
         self.area = area
         self.temperature = temperature
         self.habitat = habitat
@@ -34,7 +37,7 @@ class Fence:
 
 
 class ZooKeeper:
-    def __init__(self, name: str = "", surname: str = "", id: str = ""):
+    def __init__(self, name: str = "Name", surname: str = "Surname", id: str = "Id"):
         self.name = name
         self.surname = surname
         self.id = id
@@ -84,6 +87,7 @@ class ZooKeeper:
 
     def __str__(self) -> str:
         message = f"name: {self.name} - surname: {self.surname} - id: {self.id}"
+        return message
 
 
 
@@ -99,11 +103,12 @@ class Zoo:
         print(self)
 
     def __str__(self) -> str:
+        sepFence = "#" * 30
         message = self.name
         
-        message += "\n\n\tlist of fances:\n"
+        message += "\n\n\tList of Fances:\n"
         for fence in self.fences:
-            message += f"\t\t{fence}\n"
+            message += f"\t\t{fence}\t\t" + sepFence
         
         message += "\n\tlist of zookeepers:\n"
         for zookeeper in self.zookeepers:
@@ -111,4 +116,11 @@ class Zoo:
         
         return message
 
-
+a1 = Animal()
+a2 = Animal()
+zk1 = ZooKeeper()
+f1 = Fence()
+z1 = Zoo(fences=[f1], zookeepers=[zk1])
+zk1.add_animal(a1, f1)
+zk1.add_animal(a2, f1)
+z1.describe_zoo()
