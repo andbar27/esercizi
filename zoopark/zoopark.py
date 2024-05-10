@@ -4,7 +4,7 @@ class Animal:
                  preferred_habitat: str = "Habitat"):
         self.name = name
         self.species = species
-        if(age <= 0): age = 0.0027 
+        if(age <= 0): age = 1.0 
         self.age = age
         if(height < 0): height = 1.0
         self.height = height
@@ -28,7 +28,7 @@ class Fence:
         self.temperature = temperature
         self.habitat = habitat
         self.animals = []
-        if len(animals) > 0: self._addAnimals(animals)
+        if len(animals) > 0: self._addAnimals(animals)  #add animal only if the animal isn't in other fence
 
     def _addAnimal(self, animal: Animal):
         if self.habitat == animal.preferred_habitat and animal.fence == None:
@@ -67,7 +67,8 @@ class ZooKeeper:
             if animalArea <= fence.area:
                 fence.area -= animalArea
                 fence.animals.append(animal)
-                if animal.fence:
+                if animal.fence:    #if the animal is already in other fence, 
+                                    #add animal in this fence and remove from the previous
                     self.remove_animal(animal, animal.fence)
                 animal.fence = fence
         
