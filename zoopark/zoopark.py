@@ -41,18 +41,18 @@ class Fence:
     def _addAnimals(self, animals: list[Animal]):
         for animal in animals:
             self._addAnimal(animal)
-
-    # def __str__(self) -> str:
-    #     message = f"(area={self.area}, temperature={self.temperature}, habitat={self.habitat})\nwith animals:\n"
-    #     for animal in self.animals:
-    #         message += f"\t\t\t{animal}\n"
-    #     return message
     
     def __str__(self) -> str:
         message = f"\nFence(area={self.area}, temperature={self.temperature}, habitat={self.habitat})\n\nwith animals:\n\n"
         for animal in self.animals:
             message += f"{animal}\n"
         return message
+    
+    # def __str__(self) -> str:
+    #     message = f"(area={self.area}, temperature={self.temperature}, habitat={self.habitat})\nwith animals:\n"
+    #     for animal in self.animals:
+    #         message += f"\t\t\t{animal}\n"
+    #     return message
 
 
 class ZooKeeper:
@@ -137,7 +137,7 @@ class Zoo:
         
         print(message)
 
-    def __str__(self) -> str:
+    def __str__(self) -> str:   #for use this decomment str of animal
         sepFence = "#" * 30 + "\n"
         message = self.name
         
@@ -152,4 +152,5 @@ class Zoo:
             message += f"\t\t{zookeeper}\n"
         
         return message
+
 
