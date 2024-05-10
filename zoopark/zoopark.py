@@ -21,8 +21,8 @@ class Animal:
         return message
 
 class Fence:
-    def __init__(self, animals: list[Animal] = [], area: float = 1.0,
-                 temperature: float = 0.0, habitat: str = "Habitat"):
+    def __init__(self, area: float = 1.0, temperature: float = 0.0, 
+                 habitat: str = "Habitat",  animals: list[Animal] = []):
         if area < 0: area = 1.0
         self.area = area
         self.temperature = temperature
@@ -107,12 +107,12 @@ class ZooKeeper:
 
 
 class Zoo:
-    def __init__(self, name: str = "Zoo",
-                 fences: list[Fence] = [], 
-                 zookeepers: list[ZooKeeper] = []):
+    def __init__(self, fences: list[Fence] = [], 
+                 zoo_keepers: list[ZooKeeper] = [],
+                 name: str = "Zoo",):
         self.name = name
         self.fences = fences
-        self.zookeepers = zookeepers
+        self.zookeepers = zoo_keepers
     
     def describe_zoo(self):
         print(self)
@@ -123,6 +123,8 @@ class Zoo:
         
         message += "\n\tList of Fances:\n"
         for fence in self.fences:
+            if len(fence.animals) == 0: #Print only fences with animals
+                continue
             message += f"\t\t{fence}\t\t" + sepFence
         
         message += "\n\tList of Zookeepers:\n"
@@ -130,4 +132,3 @@ class Zoo:
             message += f"\t\t{zookeeper}\n"
         
         return message
-
