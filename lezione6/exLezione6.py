@@ -132,6 +132,17 @@ Either version of the class will work; just pick the one you like better. Add an
 flavors that stores a list of ice cream flavors. Write a method that displays these flavors. 
 Create an instance of IceCreamStand, and call this method. 
 """
+class IceCreamStand(Restaurant):
+    def __init__(self, resturant_name: str, cuisine_type: str, flavors: list[str], open: bool = False):
+        super().__init__(resturant_name, cuisine_type, open)
+        self.flavors = flavors
+    
+    def printFlavors(self):
+        for flavor in self.flavors:
+            print(flavor)
+
+kalacta = IceCreamStand("Kalacta", "Gelateria", ["limone","pistacchio","crema"])
+kalacta.printFlavors()
 
 """
 9-7. Admin: An administrator is a special kind of user. Write a class called Admin that inherits from 
@@ -140,6 +151,17 @@ list of strings like "can add post", "can delete post", "can ban user", and so o
 called show_privileges() that lists the administrator’s set of privileges. Create an instance of 
 Admin, and call your method. 
 """
+class Admin(User):
+    def __init__(self, first_name: str, last_name: str, age: int, privileges: list[str]):
+        super().__init__(first_name, last_name, age)
+        self.privileges = privileges
+    
+    def printPrivileges(self):
+        for privilege in self.privileges:
+            print(privilege)
+
+superuser = Admin("Andrea", "Barbato", 27, ["can delete post", "can add post", "can ban user"])
+superuser.printPrivileges()
 
 """
 9-8. Privileges: Write a separate Privileges class. The class should have one attribute, privileges, 
@@ -147,6 +169,23 @@ that stores a list of strings as described in Exercise 9-7. Move the show_privil
 class. Make a Privileges instance as an attribute in the Admin class. Create a new instance of Admin 
 and use your method to show its privileges.
 """
+class Privileges:
+    def __init__(self, privileges: list[str]) -> None:
+        self.privileges = privileges
+    
+    def show_privileges(self):
+        print("Privileges:")
+        for privilege in self.privileges:
+            print(privilege)
+
+class Admin(User):
+    def __init__(self, first_name: str, last_name: str, age: int, privileges: Privileges):
+        super().__init__(first_name, last_name, age)
+        self.privileges = privileges
+
+privilege = Privileges(["ban", "add", "remove"])
+superuser = Admin("Andrea", "Barbato", 27, privilege)
+superuser.privileges.show_privileges()
 
 """
 9-9. Battery Upgrade: Use the final version of electric_car.py from this section. Add a method to the 
@@ -168,13 +207,18 @@ that the import statement is working properly.
 9-11. Imported Admin: Start with your work from Exercise 9-8. Store the classes User, Privileges, and 
 Admin in one module. Create a separate file, make an Admin instance, and call show_privileges() to show that everything is working correctly.
 """
+from user0 import *
+privilege = Privileges0(["ban","unban","add","remove"])
+superU = Admin0("Andrea", "Barbato", 27, privilege)
+superU.privileges.show_privileges()
+
 
 """
 9-12. Multiple Modules: Store the User class in one module, and store the Privileges and Admin classes 
 in a separate module. In a separate file, create an Admin instance and call show_privileges() to show 
 that everything is still working correctly.
 """
-#   done, only User.py
+#   done
 
 """
 9-13. Dice: Make a class Die with one attribute called sides, which has a default value of 6. Write a 
