@@ -15,9 +15,9 @@ class Animal:
         self.fence = None
 
     def __str__(self) -> str:
-        message = f"name: {self.name} - species: {self.species} - age: {self.age}" \
-        + f" height: {self.height}  width: {self.width} - habitat: {self.preferred_habitat}" \
-        + f" - health: {self.health}"
+        message = f"Animal(name={self.name}, species={self.species}, age={self.age}," \
+        + f" height={self.height}, width={self.width}, habitat={self.preferred_habitat}," \
+        + f" health={self.health})\n"
         return message
 
 class Fence:
@@ -42,10 +42,16 @@ class Fence:
         for animal in animals:
             self._addAnimal(animal)
 
+    # def __str__(self) -> str:
+    #     message = f"(area={self.area}, temperature={self.temperature}, habitat={self.habitat})\nwith animals:\n"
+    #     for animal in self.animals:
+    #         message += f"\t\t\t{animal}\n"
+    #     return message
+    
     def __str__(self) -> str:
-        message = f"area: {self.area} - temp: {self.temperature} - habitat: {self.habitat}\n"
+        message = f"\nFence(area={self.area}, temperature={self.temperature}, habitat={self.habitat})\n\nwith animals:\n\n"
         for animal in self.animals:
-            message += f"\t\t\t{animal}\n"
+            message += f"{animal}\n"
         return message
 
 
@@ -101,7 +107,7 @@ class ZooKeeper:
         return areaRatio
 
     def __str__(self) -> str:
-        message = f"name: {self.name} - surname: {self.surname} - id: {self.id}"
+        message = f"\nZooKeeper(name={self.name}, surname={self.surname}, id={self.id})"
         return message
 
 
@@ -115,20 +121,34 @@ class Zoo:
         self.zookeepers = zoo_keepers
     
     def describe_zoo(self):
-        print(self)
+        sepFence = "#" * 30 + "\n"
+        message = ""
+        
+        message += "Guardians:\n"
+        for zookeeper in self.zookeepers:
+            message += f"{zookeeper}\n"
+
+        message += "\nFances:\n"
+        for fence in self.fences:
+            if len(fence.animals) == 0: #Print only fences with animals
+                continue
+            message += f"{fence}" + sepFence
+        
+        print(message)
 
     def __str__(self) -> str:
         sepFence = "#" * 30 + "\n"
         message = self.name
         
-        message += "\n\tList of Fances:\n"
+        message += "\n\tFances:\n"
         for fence in self.fences:
             if len(fence.animals) == 0: #Print only fences with animals
                 continue
             message += f"\t\t{fence}\t\t" + sepFence
         
-        message += "\n\tList of Zookeepers:\n"
+        message += "\n\tGuardians:\n"
         for zookeeper in self.zookeepers:
             message += f"\t\t{zookeeper}\n"
         
         return message
+
