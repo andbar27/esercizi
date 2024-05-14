@@ -71,7 +71,6 @@ class ZooKeeper:
                                     #add animal in this fence and remove from the previous
                     self.remove_animal(animal, animal.fence)
                 animal.fence = fence
-        
 
     def remove_animal(self, animal: Animal, fence: Fence):
         if animal in fence.animals:
@@ -94,7 +93,6 @@ class ZooKeeper:
             animal.height = tempHeight
             animal.width = tempWidth
             animal.health += (animal.health / 100)
-
 
     def clean(self, fence: Fence):
         totalAnimalArea = 0.0
