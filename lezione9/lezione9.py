@@ -153,3 +153,75 @@ def anagram(s: str, t: str) -> bool:
         return False
     return True
 
+
+print("\n\n ex Tree")
+# Data una lista di interi, chiamata tree, che rappresenta un albero binario, restituire True se l'albero è simmetrico; False altrimenti.
+
+# La lista di interi è formata così:
+
+#     L'elemento in posizione 0 corrisponde alla radice
+#     Dato un nodo in posizione i, il suo figlio sinistro si trova in posizione 2*i + 1
+#     Dato un nodo in posizione i, il suo figlio destro si trova in posizione 2*(i+1)
+#     Se, dato un indice i si va fuori bound facendo almeno uno dei calcoli dei punti precedenti, 
+#         significa che il nodo che corrisponde a quell'indice è una foglia.
+class TreeNode:
+    
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+# Tuple List with (index, value) compare only the values and verify it's symmetric
+# Need to compare the index 
+def is_symmetric_List_of_Tuple(myList: list[(int, int)]) -> bool:
+    lenL = len(myList)
+
+    for i in range(lenL // 2):
+        if myList[i][1] != myList[-(i + 1)][1]:
+            return False
+        
+    return True
+
+def symmetric(tree: list[int]) -> bool:
+
+    tempTree = []                   #   Radice
+    tempTree.append((0, tree[0]))   #
+
+    matrixTree = []                 #   Matrice che simula l'albero
+    matrixTree.append(tempTree)     #   cresce di 2**i
+
+    lenT = len(tree)
+    j = 0
+    while(tempTree):
+        tempTree = []
+        for i, node in matrixTree[j]:
+            iSx = 2 * i + 1
+            iDx = 2 * (i + 1)
+            if node:
+                if iSx < lenT:
+                    tempTree.append((iSx, tree[iSx]))
+                if iDx < lenT:
+                    tempTree.append((iDx, tree[iDx]))
+
+        matrixTree.append(tempTree)
+        print(tempTree)
+        if is_symmetric_List_of_Tuple(tempTree) == False:
+            return False
+        j += 1
+    
+    print("\n\n\nMatrix Tree complete:")
+    for riga in matrixTree:
+        print(riga)
+    
+    return True
+
+def _symmetric(tree: list[int]):
+    pass
+
+print("Expected output: True")
+print(symmetric([1,2,2,3,4,4,3]), "\n")
+print("Expected output: False")
+print(symmetric([1,2,2,3,4,4,2]), "\n")
+print("Expected output: False")
+print(symmetric([1,2,2,3,4,4,3,None,3,None,None,None,None,None,None]), "\n")
+print(symmetric([1,2,2,3,4,4,3,3,None,None,None,None,None,None,3,2,2,None,None]), "\n")
