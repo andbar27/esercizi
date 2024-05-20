@@ -172,7 +172,10 @@ class TreeNode:
         self.right = right
 
 # Tuple List with (index, value) compare only the values and verify it's symmetric
-# Need to compare the index 
+# Need to compare the index
+# Forse sarebbe meglio usare un dizionario invece della tupla cercando l'indice
+# simmetrico corrispondente come chiave e verificandone la presenza, invece di un 
+# confronto "posizionale"
 def is_symmetric_List_of_Tuple(myList: list[(int, int)]) -> bool:
     lenL = len(myList)
 
