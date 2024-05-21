@@ -228,3 +228,67 @@ print(symmetric([1,2,2,3,4,4,2]), "\n")
 print("Expected output: False")
 print(symmetric([1,2,2,3,4,4,3,None,3,None,None,None,None,None,None]), "\n")
 print(symmetric([1,2,2,3,4,4,3,3,None,None,None,None,None,None,3,2,2,None,None]), "\n")
+
+def is_symmetric_List_of_Dict(myList: dict, level: int) -> bool:
+    lenL = 2 ** (level + 1)
+
+    fib = 0
+    if level == 0:
+        fib = 1
+    else:
+        for i in range(level + 1):
+            fib += 2 ** i
+
+    for i in range(lenL // 2):
+        iK = fib + i
+        jK = fib + lenL - i - 1
+        condition = (fib + i in myList) + (fib + lenL - 1 - i in myList)
+        if condition == 2:
+            if myList[iK] != myList[jK]:
+                return False
+        elif condition == 1:
+            return False
+        
+    return True
+
+def symmetric(tree: list[int]) -> bool:
+
+    tempTree = dict()               #   Radice
+    tempTree[0]= tree[0]            #
+
+    matrixTree = []                 #   Matrice che simula l'albero
+    matrixTree.append(tempTree)     #   cresce di 2**i
+
+    lenT = len(tree)
+    j = 0
+    while(tempTree):
+        tempTree = dict()
+        for i, node in matrixTree[j].items():
+            iSx = 2 * i + 1
+            iDx = 2 * (i + 1)
+            if node:
+                if iSx < lenT:
+                    tempTree[iSx] = tree[iSx]
+                if iDx < lenT:
+                    tempTree[iDx] = tree[iDx]
+
+        matrixTree.append(tempTree)
+        j += 1
+        print(tempTree)
+        if is_symmetric_List_of_Dict(tempTree, j-1) == False:
+            return False
+        
+    
+    print("\n\n\nMatrix Tree complete:")
+    for riga in matrixTree:
+        print(riga)
+    
+    return True
+
+print("Expected output: True")
+print(symmetric([1,2,2,3,4,4,3]), "\n")
+print("Expected output: False")
+print(symmetric([1,2,2,3,4,4,2]), "\n")
+print("Expected output: False")
+print(symmetric([1,2,2,3,4,4,3,None,3,None,None,None,None,None,None]), "\n")
+print(symmetric([1,2,2,3,4,4,3,3,None,None,None,None,None,None,3,2,2,None,None]), "\n")
