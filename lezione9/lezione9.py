@@ -236,15 +236,17 @@ def is_symmetric_List_of_Dict(myList: dict, level: int) -> bool:    # livello 0 
     lenL = 2 ** level
 
     fib = 0                     # Calcolo l'indice di partenza considerando il livello in cui siamo
-    if level - 1 == 0:
+    if level - 1 < 0:           # Caso Radice
+        fib = 0
+    elif level - 1 == 0:        # Caso primo livello
         fib = 1
     else:
-        for i in range(level):
+        for i in range(level):  # Casi maggiore del primo livello
             fib += 2 ** i
 
     for i in range(lenL // 2):
-        iK = fib + i            # Calcolo l'indice da controllare ed il suo simmetrico
-        jK = fib + lenL - i - 1
+        iK = fib + i            # Calcolo l'indice da controllare 
+        jK = fib + lenL - i - 1 # ed il suo simmetrico
         condition = (fib + i in myList) + (fib + lenL - 1 - i in myList)
         if condition == 2:      # Verifico che vi siano entrambi gli elementi
             if myList[iK] != myList[jK]:
@@ -252,14 +254,14 @@ def is_symmetric_List_of_Dict(myList: dict, level: int) -> bool:    # livello 0 
         elif condition == 1:
             return False        # Se c'è solo uno dei due elementi non è simmetrico
         
-    return True
+    return True                 # Se non ho trovato asimmetrie il livello è simmetrico
 
 def symmetric(tree: list[int]) -> bool:
 
     tempTree = dict()               # Radice
-    tempTree[0]= tree[0]            #
+    tempTree[0]= tree[0]            # tempTree rappresenta il livello, [posizione nodo come indice lista tree]: [valore nodo]
 
-    matrixTree = []                 # Matrice che simula l'albero
+    matrixTree = []                 # Matrice che simula l'albero, ogni riga è un livello
     matrixTree.append(tempTree)     # cresce di 2**j
 
     lenT = len(tree)
@@ -271,7 +273,7 @@ def symmetric(tree: list[int]) -> bool:
             iDx = 2 * (i + 1)
             if node:
                 if iSx < lenT:
-                    tempTree[iSx] = tree[iSx]
+                    tempTree[iSx] = tree[iSx]   # Costruisco livello [posizione nodo come indice lista tree]: [valore nodo]
                 if iDx < lenT:
                     tempTree[iDx] = tree[iDx]
 
@@ -295,3 +297,37 @@ print("Expected output: True")
 print(symmetric([1,2,2,3,4,4,3,3,None,None,None,None,None,None,3,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None]), "\n")
 print("Expected output: False")
 print(symmetric([1,2,2,3,4,4,3,3,None,None,None,None,None,None,3,None,None]), "\n")
+
+##########################################################
+# Provo a trovare asimmetrie al momento
+def symmetric(tree: list[int]) -> bool:
+
+    livello = 0
+    indiceDiPartenza = 0
+    tempTree = dict()               # Radice
+                                    # tempTree rappresenta il livello, [posizione nodo come indice lista tree]: [valore nodo]
+    tempTree[indiceDiPartenza] = tree[indiceDiPartenza]            
+
+    matrixTree = []                 # Matrice che simula l'albero, ogni riga è un livello
+    matrixTree.append(tempTree)     # cresce di 2**j
+
+    lenT = len(tree)                # Nodi totali nell'albero
+    
+    indiceDiPartenza = 2 ** livello
+    while(indiceDiPartenza < lenT):
+        tempTree = dict()
+        for i, node in matrixTree[j].items():   # Esploro il livello e lo metto in una lista
+            iSx = 2 * i + 1                     # Per ogni nodo trovo gli indici dei figli
+            iDx = 2 * (i + 1)
+            if node:
+                if iSx < lenT:
+                    tempTree[iSx] = tree[iSx]   # Costruisco livello [posizione nodo come indice lista tree]: [valore nodo]
+                if iDx < lenT:
+                    tempTree[iDx] = tree[iDx]
+
+        matrixTree.append(tempTree) # Aggiungo livello corrente alla Matrice
+        livello += 1
+        indiceDiPartenza += 2 ** livello  # Somma il num di elementi 
+        print(tempTree)
+        
+    return True
