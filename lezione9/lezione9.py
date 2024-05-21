@@ -221,13 +221,22 @@ def symmetric(tree: list[int]) -> bool:
 def _symmetric(tree: list[int]):
     pass
 
+import time
+inizio = time.time_ns()
 print("Expected output: True")
 print(symmetric([1,2,2,3,4,4,3]), "\n")
 print("Expected output: False")
 print(symmetric([1,2,2,3,4,4,2]), "\n")
 print("Expected output: False")
 print(symmetric([1,2,2,3,4,4,3,None,3,None,None,None,None,None,None]), "\n")
+print("Expected output: False")
 print(symmetric([1,2,2,3,4,4,3,3,None,None,None,None,None,None,3,2,2,None,None]), "\n")
+print("Expected output: True")
+print(symmetric([1,2,2,3,4,4,3,3,None,None,None,None,None,None,3,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None]), "\n")
+print("Expected output: False")
+print(symmetric([1,2,2,3,4,4,3,3,None,None,None,None,None,None,3,None,None]), "\n")
+fine = time.time_ns()
+print("TEMPO ESECUZIONE: ", fine - inizio)
 
 ###########################################################################################
 print("\n###################\nSymmetric with Dict\n")
@@ -285,6 +294,8 @@ def symmetric(tree: list[int]) -> bool:
         
     return True
 
+import time
+inizio = time.time_ns()
 print("Expected output: True")
 print(symmetric([1,2,2,3,4,4,3]), "\n")
 print("Expected output: False")
@@ -297,6 +308,8 @@ print("Expected output: True")
 print(symmetric([1,2,2,3,4,4,3,3,None,None,None,None,None,None,3,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None]), "\n")
 print("Expected output: False")
 print(symmetric([1,2,2,3,4,4,3,3,None,None,None,None,None,None,3,None,None]), "\n")
+fine = time.time_ns()
+print("TEMPO ESECUZIONE: ", fine - inizio)
 
 ##########################################################
 # Provo a trovare asimmetrie al momento
@@ -315,8 +328,8 @@ def symmetric(tree: list[int]) -> bool:
         indiceDiArrivo = indiceDiPartenza + lenLivello - 1
 
         for i in range(lenLivello // 2):
-            iSx = indiceDiPartenza + i                     # Per ogni nodo trovo gli indici dei figli
-            iDx = indiceDiArrivo - i
+            iSx = indiceDiPartenza + i              # per ogni indice verifico il suo simmetrico
+            iDx = indiceDiArrivo - i                # tenendo conto del livello in cui sono e quindi dell'indice di partenza
             condition = (iSx < lenT) + (iDx < lenT)
             if condition == 2: 
                 if tree[iSx] != tree[iDx]:
@@ -329,6 +342,8 @@ def symmetric(tree: list[int]) -> bool:
         
     return True
 
+import time
+inizio = time.time_ns()
 print("Expected output: True")
 print(symmetric([1,2,2,3,4,4,3]), "\n")
 print("Expected output: False")
@@ -341,3 +356,5 @@ print("Expected output: True")
 print(symmetric([1,2,2,3,4,4,3,3,None,None,None,None,None,None,3,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None]), "\n")
 print("Expected output: False")
 print(symmetric([1,2,2,3,4,4,3,3,None,None,None,None,None,None,3,None,None]), "\n")
+fine = time.time_ns()
+print("TEMPO ESECUZIONE: ", fine - inizio)
