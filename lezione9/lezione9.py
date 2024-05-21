@@ -229,42 +229,45 @@ print("Expected output: False")
 print(symmetric([1,2,2,3,4,4,3,None,3,None,None,None,None,None,None]), "\n")
 print(symmetric([1,2,2,3,4,4,3,3,None,None,None,None,None,None,3,2,2,None,None]), "\n")
 
-def is_symmetric_List_of_Dict(myList: dict, level: int) -> bool:
-    lenL = 2 ** (level + 1)
+###########################################################################################
+print("\n###################\nSymmetric with Dict\n")
 
-    fib = 0
-    if level == 0:
+def is_symmetric_List_of_Dict(myList: dict, level: int) -> bool:    # livello 0 = radice
+    lenL = 2 ** level
+
+    fib = 0                     # Calcolo l'indice di partenza considerando il livello in cui siamo
+    if level - 1 == 0:
         fib = 1
     else:
-        for i in range(level + 1):
+        for i in range(level):
             fib += 2 ** i
 
     for i in range(lenL // 2):
-        iK = fib + i
+        iK = fib + i            # Calcolo l'indice da controllare ed il suo simmetrico
         jK = fib + lenL - i - 1
         condition = (fib + i in myList) + (fib + lenL - 1 - i in myList)
-        if condition == 2:
+        if condition == 2:      # Verifico che vi siano entrambi gli elementi
             if myList[iK] != myList[jK]:
-                return False
+                return False    # Se sono diversi non sono simmetrici
         elif condition == 1:
-            return False
+            return False        # Se c'è solo uno dei due elementi non è simmetrico
         
     return True
 
 def symmetric(tree: list[int]) -> bool:
 
-    tempTree = dict()               #   Radice
+    tempTree = dict()               # Radice
     tempTree[0]= tree[0]            #
 
-    matrixTree = []                 #   Matrice che simula l'albero
-    matrixTree.append(tempTree)     #   cresce di 2**i
+    matrixTree = []                 # Matrice che simula l'albero
+    matrixTree.append(tempTree)     # cresce di 2**j
 
     lenT = len(tree)
     j = 0
     while(tempTree):
         tempTree = dict()
-        for i, node in matrixTree[j].items():
-            iSx = 2 * i + 1
+        for i, node in matrixTree[j].items():   # Esploro il livello e lo metto in una lista
+            iSx = 2 * i + 1                     # Per ogni nodo trovo gli indici dei figli
             iDx = 2 * (i + 1)
             if node:
                 if iSx < lenT:
@@ -272,17 +275,12 @@ def symmetric(tree: list[int]) -> bool:
                 if iDx < lenT:
                     tempTree[iDx] = tree[iDx]
 
-        matrixTree.append(tempTree)
+        matrixTree.append(tempTree) # Aggiungo livello corrente alla Matrice
         j += 1
         print(tempTree)
-        if is_symmetric_List_of_Dict(tempTree, j-1) == False:
+        if is_symmetric_List_of_Dict(tempTree, j) == False:
             return False
         
-    
-    print("\n\n\nMatrix Tree complete:")
-    for riga in matrixTree:
-        print(riga)
-    
     return True
 
 print("Expected output: True")
@@ -291,4 +289,9 @@ print("Expected output: False")
 print(symmetric([1,2,2,3,4,4,2]), "\n")
 print("Expected output: False")
 print(symmetric([1,2,2,3,4,4,3,None,3,None,None,None,None,None,None]), "\n")
+print("Expected output: False")
 print(symmetric([1,2,2,3,4,4,3,3,None,None,None,None,None,None,3,2,2,None,None]), "\n")
+print("Expected output: True")
+print(symmetric([1,2,2,3,4,4,3,3,None,None,None,None,None,None,3,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None]), "\n")
+print("Expected output: False")
+print(symmetric([1,2,2,3,4,4,3,3,None,None,None,None,None,None,3,None,None]), "\n")
