@@ -304,30 +304,40 @@ def symmetric(tree: list[int]) -> bool:
 
     livello = 0
     indiceDiPartenza = 0
-    tempTree = dict()               # Radice
-                                    # tempTree rappresenta il livello, [posizione nodo come indice lista tree]: [valore nodo]
-    tempTree[indiceDiPartenza] = tree[indiceDiPartenza]            
-
-    matrixTree = []                 # Matrice che simula l'albero, ogni riga è un livello
-    matrixTree.append(tempTree)     # cresce di 2**j
 
     lenT = len(tree)                # Nodi totali nell'albero
     
     indiceDiPartenza = 2 ** livello
-    while(indiceDiPartenza < lenT):
-        tempTree = dict()
-        for i, node in matrixTree[j].items():   # Esploro il livello e lo metto in una lista
-            iSx = 2 * i + 1                     # Per ogni nodo trovo gli indici dei figli
-            iDx = 2 * (i + 1)
-            if node:
-                if iSx < lenT:
-                    tempTree[iSx] = tree[iSx]   # Costruisco livello [posizione nodo come indice lista tree]: [valore nodo]
-                if iDx < lenT:
-                    tempTree[iDx] = tree[iDx]
 
-        matrixTree.append(tempTree) # Aggiungo livello corrente alla Matrice
+    while(indiceDiPartenza < lenT):
+
+        lenLivello = 2 ** (livello + 1)
+        indiceDiArrivo = indiceDiPartenza + lenLivello - 1
+
+        for i in range(lenLivello // 2):
+            iSx = indiceDiPartenza + i                     # Per ogni nodo trovo gli indici dei figli
+            iDx = indiceDiArrivo - i
+            condition = (iSx < lenT) + (iDx < lenT)
+            if condition == 2: 
+                if tree[iSx] != tree[iDx]:
+                    return False
+            elif condition == 1:
+                return False
+                 
         livello += 1
         indiceDiPartenza += 2 ** livello  # Somma il num di elementi 
-        print(tempTree)
         
     return True
+
+print("Expected output: True")
+print(symmetric([1,2,2,3,4,4,3]), "\n")
+print("Expected output: False")
+print(symmetric([1,2,2,3,4,4,2]), "\n")
+print("Expected output: False")
+print(symmetric([1,2,2,3,4,4,3,None,3,None,None,None,None,None,None]), "\n")
+print("Expected output: False")
+print(symmetric([1,2,2,3,4,4,3,3,None,None,None,None,None,None,3,2,2,None,None]), "\n")
+print("Expected output: True")
+print(symmetric([1,2,2,3,4,4,3,3,None,None,None,None,None,None,3,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None]), "\n")
+print("Expected output: False")
+print(symmetric([1,2,2,3,4,4,3,3,None,None,None,None,None,None,3,None,None]), "\n")
