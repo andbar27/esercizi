@@ -164,12 +164,7 @@ print("\n\n ex Tree")
 #     Dato un nodo in posizione i, il suo figlio destro si trova in posizione 2*(i+1)
 #     Se, dato un indice i si va fuori bound facendo almeno uno dei calcoli dei punti precedenti, 
 #         significa che il nodo che corrisponde a quell'indice è una foglia.
-class TreeNode:
-    
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
+
 
 # Tuple List with (index, value) compare only the values and verify it's symmetric
 # Need to compare the index
@@ -218,8 +213,6 @@ def symmetric(tree: list[int]) -> bool:
     
     return True
 
-def _symmetric(tree: list[int]):
-    pass
 
 import time
 inizio = time.time_ns()
@@ -330,6 +323,7 @@ def symmetric(tree: list[int]) -> bool:
         for i in range(lenLivello // 2):
             iSx = indiceDiPartenza + i              # per ogni indice verifico il suo simmetrico
             iDx = indiceDiArrivo - i                # tenendo conto del livello in cui sono e quindi dell'indice di partenza
+
             condition = (iSx < lenT) + (iDx < lenT)
             if condition == 2: 
                 if tree[iSx] != tree[iDx]:
@@ -338,7 +332,7 @@ def symmetric(tree: list[int]) -> bool:
                 return False
                  
         livello += 1
-        indiceDiPartenza += 2 ** livello  # Somma il num di elementi 
+        indiceDiPartenza += 2 ** livello  # Somma il num di elementi del livello ai precedenti
         
     return True
 
@@ -358,3 +352,79 @@ print("Expected output: False")
 print(symmetric([1,2,2,3,4,4,3,3,None,None,None,None,None,None,3,None,None]), "\n")
 fine = time.time_ns()
 print("TEMPO ESECUZIONE: ", fine - inizio)
+
+###########################################################################################s
+class TreeNode:
+    
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
+# Provo a trovare asimmetrie al momento
+def symmetric(tree: list[int]) -> bool:
+
+    livello = 0
+    indiceDiPartenza = 0
+    head = TreeNode(tree[indiceDiPartenza], None, None)
+    treeN = head
+
+    lenT = len(tree)                # Nodi totali nell'albero
+    
+    indiceDiPartenza = 2 ** livello
+
+    while(indiceDiPartenza < lenT):
+
+        lenLivello = 2 ** (livello + 1)
+        indiceDiArrivo = indiceDiPartenza + lenLivello - 1
+
+        for i in range(indiceDiArrivo + 1):
+            iSx = indiceDiPartenza + i              # per ogni indice verifico il suo simmetrico
+            iDx = indiceDiArrivo - i                # tenendo conto del livello in cui sono e quindi dell'indice di partenza
+            if(iSx < lenT):
+                treeN = tree[indiceDiPartenza]
+            if(iDx < lenT):
+                treeN = 0 #movedemo
+            
+                 
+        livello += 1
+        indiceDiPartenza += 2 ** livello  # Somma il num di elementi del livello ai precedenti
+        
+    return True
+
+########################################################################################
+class TreeNode:
+    
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def symmetric(tree: list[int]) -> bool:
+
+    tempTree = []
+    head = TreeNode(0, None, None)
+
+    matrixTree = []                 # Matrice che simula l'albero, ogni riga è un livello
+    matrixTree.append(tempTree)     # cresce di 2**j
+
+    lenT = len(tree)
+    j = 0
+    while(tempTree):
+        tempTree = dict()
+        for i, node in matrixTree[j].items():   # Esploro il livello e lo metto in una lista
+            iSx = 2 * i + 1                     # Per ogni nodo trovo gli indici dei figli
+            iDx = 2 * (i + 1)
+            if node:
+                if iSx < lenT:
+                    tempTree[iSx] = tree[iSx]   # Costruisco livello [posizione nodo come indice lista tree]: [valore nodo]
+                if iDx < lenT:
+                    tempTree[iDx] = tree[iDx]
+
+        matrixTree.append(tempTree) # Aggiungo livello corrente alla Matrice
+        j += 1
+        print(tempTree)
+        
+        
+    return True
