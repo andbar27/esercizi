@@ -2,12 +2,16 @@ import random
 
 percorso = ['_' for i in range(70)]
 
+posTartaruga = 1
+posLepre = 1
 energiaTartaruga = 100
 energiaLepre = 100
 meteo = "soleggiato"
 
 
-def mossaTartaruga(posTartaruga):
+def mossaTartaruga():
+    global posTartaruga
+
     estrazione = random.randint(1,10)
     posTartarugaPrecedente = posTartaruga
 
@@ -28,11 +32,11 @@ def mossaTartaruga(posTartaruga):
 
     percorso[posTartarugaPrecedente - 1] = '_'
     percorso[posTartaruga - 1] = 'T'
-
-    return posTartaruga
     
 
-def mossaLepre(posLepre):
+def mossaLepre():
+    global posLepre
+
     estrazione = random.randint(1,10)
     posLeprePrecedente = posLepre
 
@@ -62,16 +66,18 @@ def mossaLepre(posLepre):
     percorso[posLeprePrecedente - 1] = '_'
     percorso[posLepre - 1] = 'L'
 
-    return posLepre
-
     
     
 
 def stampaPercorso(start = 0):
+    global percorso
     [print(percorso[i]) for i in range(start, 70)]
 
 
 def mainLoop():
+    global posTartaruga
+    global posLepre
+
     tick = 1
     flagFineGara = False
 
@@ -82,8 +88,8 @@ def mainLoop():
     while not flagFineGara:
         print("\nTick: ", tick)
         
-        posTartaruga = mossaTartaruga(posTartaruga)
-        posLepre = mossaLepre(posLepre)
+        mossaTartaruga()
+        mossaLepre()
 
         if posLepre == posTartaruga:
             percorso[posLepre - 1] = 'OUCH!!!'
@@ -115,7 +121,14 @@ bonus = {10: 5, 25: 3, 50: 10}
 
 
 
-def mossaTartarugaExtra(posTartaruga):
+def mossaTartarugaExtra():
+    global posTartaruga
+    global energiaTartaruga
+    global meteo
+    global ostacoli
+    global bonus
+    global percorso
+
     estrazione = random.randint(1,10)
     posTartarugaPrecedente = posTartaruga
     
@@ -164,10 +177,16 @@ def mossaTartarugaExtra(posTartaruga):
     percorso[posTartarugaPrecedente - 1] = '_'
     percorso[posTartaruga - 1] = 'T'
 
-    return posTartaruga
     
 
-def mossaLepreExtra(posLepre):
+def mossaLepreExtra():
+    global posLepre
+    global energiaLepre
+    global meteo
+    global ostacoli
+    global bonus
+    global percorso
+
     estrazione = random.randint(1,10)
     posLeprePrecedente = posLepre
 
@@ -196,7 +215,7 @@ def mossaLepreExtra(posLepre):
         else:
             energiaLepre += 10
 
-    else:                       # Piccola Scivolata en-8
+    else:                       # Piccola Scivolata 20% en-8
         if energiaLepre >= 8:
             energiaLepre -= 8
             posLepre -= 2
@@ -227,10 +246,13 @@ def mossaLepreExtra(posLepre):
     percorso[posLeprePrecedente - 1] = '_'
     percorso[posLepre - 1] = 'L'
 
-    return posLepre
-
 
 def mainLoopExtra():
+    global meteo
+    global posLepre
+    global posTartaruga
+    global percorso
+
     tick = 1
     tickFlag = True
     flagFineGara = False
@@ -242,8 +264,8 @@ def mainLoopExtra():
     while not flagFineGara:
         print("\nTick: ", tick)
         
-        posTartaruga = mossaTartaruga(posTartaruga)
-        posLepre = mossaLepre(posLepre)
+        mossaTartarugaExtra()
+        mossaLepreExtra()
 
         if posLepre == posTartaruga:
             percorso[posLepre - 1] = 'OUCH!!!'
