@@ -24,3 +24,65 @@ class Student(Person):
         super().__init__(nome, surname, cf, age, species)
         self.matricula = matricula
         
+
+# CLASSI ASTRATTE ------------------------------------
+
+from abc import ABC, abstractmethod
+
+class AbcAnimal(ABC):
+
+    
+
+    @abstractmethod
+    def verso(self):
+        
+        pass
+
+# ----------------------------------------------------
+
+    # FUNZIONI DI CLASSE ---------------------------------
+
+    n_instances = 0
+
+    @classmethod
+    def get_instance(cls):
+        return cls.n_instances
+    
+    # ----------------------------------------------------
+
+
+    # FUNZIONI STATICHE ----------------------------------
+
+    @staticmethod
+    def anno_casuale():
+        import random
+        return random.randint(-7000, 2024)
+    
+    @staticmethod
+    def funzione_statica(): 
+        print("Hello world", AbcAnimal.anno_casuale())
+
+    # ----------------------------------------------------
+
+
+class Cavallo(AbcAnimal):
+
+    def __init__(self, nome) -> None:
+        super().__init__()
+        self.nome
+
+cavallo = Cavallo("cav")
+
+"""DA ERRORE PERCHÉ NON ABBIAMO DEFINITO IL METODO ASTRATTO VERSO"""
+
+class Cane(AbcAnimal):
+
+    def __init__(self, nome) -> None:
+        super().__init__()
+
+    def verso(self):
+        print("Bau")
+
+cane = Cane("can")
+cane.verso()
+

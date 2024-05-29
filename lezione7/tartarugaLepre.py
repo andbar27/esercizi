@@ -71,7 +71,8 @@ def mossaLepre():
 
 def stampaPercorso(start = 0):
     global percorso
-    [print(percorso[i]) for i in range(start, 70)]
+    #[print(percorso[i]) for i in range(start, 70)]
+    print(percorso)
 
 
 def mainLoop():
