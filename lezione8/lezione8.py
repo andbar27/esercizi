@@ -65,13 +65,13 @@ class AbcAnimal(ABC):
     # ----------------------------------------------------
 
 
-class Cavallo(AbcAnimal):
+"""class Cavallo(AbcAnimal):
 
     def __init__(self, nome) -> None:
         super().__init__()
         self.nome
 
-cavallo = Cavallo("cav")
+cavallo = Cavallo("cav")"""
 
 """DA ERRORE PERCHÉ NON ABBIAMO DEFINITO IL METODO ASTRATTO VERSO"""
 
@@ -86,3 +86,4 @@ class Cane(AbcAnimal):
 cane = Cane("can")
 cane.verso()
 
+AbcAnimal.funzione_statica()
