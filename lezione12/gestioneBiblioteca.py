@@ -38,10 +38,7 @@ class Biblioteca:
 
         listaTitoli: list[str] = []
 
-        listaTitoli = [str(libro) for libro in self.libri if isinstance(libro, Libro) and libro.loanStatus == False]
-        # for libro in self.libri: 
-        #     if isinstance(libro,Libro) and libro.loanStatus == False:
-        #         listaTitoli.append(str(libro))
+        listaTitoli = [str(libro) for libro in self.libri if libro.loanStatus == False]
 
         if len(listaTitoli) == 0:
             print("libreria vuota")
@@ -87,5 +84,5 @@ bbl.mostra_libri_disponibili()
 bbl.restituisci_libro("ciao")
 print("lista: ",bbl.libri)
 print(bbl.mostra_libri_disponibili())
-bbl.aggiungi_libro("bella")
+#bbl.aggiungi_libro("bella")
 print(bbl.mostra_libri_disponibili())
