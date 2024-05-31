@@ -6,9 +6,9 @@ class Animal:
         self.species = species
         if(age <= 0): age = 1.0 
         self.age = age
-        if(height < 0): height = 1.0
+        if(height < 0): height = 0.0
         self.height = height
-        if(width < 0): width = 1.0
+        if(width < 0): width = 0.0
         self.width = width
         self.preferred_habitat = preferred_habitat
         self.health = round(100 * (1 / self.age), 3)
@@ -23,7 +23,7 @@ class Animal:
 class Fence:
     def __init__(self, area: float = 1.0, temperature: float = 0.0, 
                  habitat: str = "Habitat",  animals: list[Animal] = []):
-        if area < 0: area = 1.0
+        if area < 0: area = 0.0
         self.area = area
         self.temperature = temperature
         self.habitat = habitat
