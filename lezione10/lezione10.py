@@ -228,15 +228,64 @@ class Library:
 #     Abstract method get_role to be implemented by subclasses.
 #     __str__ method to return a string representation of the person.
 
-# Create subclasses Student and Professor that inherit from Person and implement the abstract methods:
+class Person(ABC):
+
+    def __init__(self, name: str, age: int) -> None:
+        super().__init__()
+        self.name = name
+        self.age = age
+
+    @abstractmethod
+    def get_role(self) -> str: 
+        pass
+
+    def __str__(self) -> str:
+        return f"name = {self.name}, age = {self.age}"
+
+# Create subclasses Student and Professor that inherit from Person and implement 
+# the abstract methods:
 
 # Student:
 # Additional attributes: student_id (string), courses (list of Course instances)
 # Method enroll(course) to enroll the student in a course.
 # Professor:
-# Additional attributes: professor_id (string), department (string), courses (list of Course instances)
+# Additional attributes: professor_id (string), department (string), courses 
+# (list of Course instances)
 # Method assign_to_course(course) to assign the professor to a course.
 
+class Student(Person):
+
+    def __init__(self, name: str, age: int, student_id: str, courses: list[Course]) -> None:
+        super().__init__(name, age)
+        self.student_id = student_id
+        self.courses = []
+        if courses and courses != []:
+            self.courses = courses
+    
+    def get_role(self) -> str:
+        return("Student")
+
+    def enroll(self, course: Course) -> None:
+        if course not in self.courses:
+            self.courses.append(course)
+
+
+class Professor(Person):
+
+    def __init__(self, name: str, age: int, professor_id: str, department: str, courses: list[Course]) -> None:
+        super().__init__(name, age)
+        self.professor_id = professor_id
+        self.department = department
+        self.courses = []
+        if courses and courses != []:
+            self.courses = courses
+
+    def assign_to_course(self, course: Course):
+        if course not in self.courses:
+            self.courses.append(course)
+
+    def get_role(self) -> str:
+        return "Professor"
 
 # Create a class Course:
 # Attributes:
@@ -252,6 +301,29 @@ class Library:
 #     add_student(student) to add a student to the course.
 #     set_professor(professor) to set the professor for the course.
 #     __str__ method to return a string representation of the course.
+
+class Course:
+
+    def __init__(self, course_name: str, course_code: str, students: list[Student], professor: Professor) -> None:
+        self.course_name = course_name
+        self.course_code = course_code
+        self.students = []
+        if students and students != []:
+            self.students = students
+
+        self.professor = professor
+
+    def add_student(self, student: Student): 
+        if student not in self.students:
+            self.students.append(student)
+            student.enroll(self)
+
+    def set_professor(self, professor: Professor):
+        self.professor = professor
+        professor.assign_to_course(self)
+
+    def __str__(self) -> str:
+        return f"course_name = {self.course_name}, course_code = {self.course_code}, students = {self.students}, professor = {self.professor}"
 
 # Create a class Department:
 
@@ -269,6 +341,28 @@ class Library:
 #     add_professor(professor) to add a professor to the department.
 #     __str__ method to return a string representation of the department.
 
+class Department:
+
+    def __init__(self, department_name, courses, professors) -> None:
+        self.department_name = department_name
+        self.courses = []
+        if courses and courses != []:
+            self.courses = courses
+        if professors and professors != []:
+            self.professors = professors
+        
+    def add_course(self, course):
+        if course not in self.courses:
+            self.courses.append(course)
+
+    def add_professor(self, professor):
+        if professor not in self.professors:
+            self.professors.append(professor)
+
+    def __str__(self) -> str:
+        return f"department_name = {self.department_name}, courses = {self.courses}, professors = {self.professors}"
+
+
 # Create a class University:
 
 # Attributes:
@@ -285,6 +379,28 @@ class Library:
 #     add_student(student) to add a student to the university.
 #     __str__ method to return a string representation of the university.
 
+class University:
+
+    def __init__(self, name: str, departments: list[Department], students: list[Student]) -> None:
+        self.name = name
+        self.departments = []
+        if departments and departments != []:
+            self.departments = departments
+        
+        self.students = []
+        if students and students != []:
+            self.students = students
+
+    def add_department(self, department: Department):
+        if department not in self.departments:
+            self.departments.append(department)
+
+    def add_student(self, student: Student):
+        if student not in self.students:
+            self.students.append(student)   
+
+    def __str__(self) -> str:
+        return f"name = {self.name}, departments = {self.departments}, students = {self.students}"
 
 # Create a script:
 
@@ -292,3 +408,5 @@ class Library:
 # Add them to the university.
 # Enroll students in courses and assign professors to courses.
 # Display the state of the university.
+
+"Magari dopo"
