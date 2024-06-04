@@ -78,18 +78,22 @@ class MathOperations:
 
 class Book:
 
-    def __init__(self, title, author, isbn) -> None:
+    def __init__(self, title: str, author: str, isbn: int) -> None:
         self.title = title
         self.author = author
         self.isbn = isbn
+        self.borrowed = False
 
     @classmethod
     def from_string(cls, book_str: str) -> Book:
         parameters = [param.strip() for param in book_str.split(",")]
-        return Book(parameters[0], parameters[1], parameters[2])
+        if len(parameters) != 2:
+            print("Wrong string format")
+            return
+        return Book(parameters[0], parameters[1], int(parameters[2]))
 
     def __str__(self) -> str:
-        return f"{self.title}, {self.author}, {self.isbn}"
+        return f"title = {self.title}, author = {self.author}, isbn = {self.isbn}"
 
 # Example: 
 
@@ -110,6 +114,38 @@ class Book:
 
 #     @classmethod from_string(cls, member_str) to create a Member instance from a string in the format "name, member_id".
 
+class Member:
+
+    def __init__(self, name: str, member_id: int, borrowed_books: list[Book] = None) -> None:
+        self.name = name
+        self.member_id = member_id
+        if borrowed_books != None:
+            self.borrowed_books = borrowed_books
+        else:
+            self.borrowed_books = []
+
+    def borrow_book(self, book: Book):
+        if book not in self.borrowed_books and book.borrowed == False:
+            self.borrowed_books.append(book)
+            book.borrowed = True
+
+    def return_book(self, book: Book):
+        if book in self.borrowed_books:
+            self.borrowed_books.remove(book)
+            book.borrowed = False
+
+    @classmethod
+    def from_string(cls, member_str):
+        params = [param.strip() for param in member_str.split(",")]
+        if len(params) != 2:
+            print("Wrong string format")
+            return
+        return Member(params[0], int(params[1]))
+    
+    def __str__(self) -> str:
+        return f"name = {self.name}, member_id = {self.member_id}, borrowed_books: {self.borrowed_books}"
+
+
 # Create a Library class with the following attributes: books, members, total_books (class attribute to keep track of the total number of books)
 # The library class must contain the following methods:
 
@@ -125,9 +161,55 @@ class Book:
 
 #     @classmethod library_statistics(cls) to print the total number of books.
 
+class Library:
+
+    total_books = 0 # Logicamente non ha molto senso che sia un attributo di classe, ma ok
+
+    def __init__(self, books: list[Book] = None, members: list[Member] = None, total_books: int = 0) -> None:
+        self.books = []
+        if books != None:
+            self.books = books
+        
+        self.members = []
+        if members != None:
+            self.members = members
+        
+        Library.total_books = len(self.books)
+
+    def add_book(self, book: Book) -> None:
+        if book not in self.books:
+            self.books.append(book)
+            Library.total_books = len(self.books)
+
+    def remove_book(self, book: Book) -> None:
+        if book in self.books:
+            self.books.remove(book)
+            Library.total_books = len(self.books)
+
+    def register_member(self, member) -> None:
+        if member not in self.members:
+            self.members.append(member)
+            
+    def lend_book(self, book: Book, member: Member) -> bool:
+        if member in self.members and book.borrowed == False:
+            return True
+        
+        return False
+    
+    @classmethod 
+    def library_statistics(cls):
+        return cls.total_books
+    
+    def __str__(self) -> str:
+        return f"List of Books = {self.books}\nList of Members = {self.members}"
+
+
 # Create a script and play a bit with the classes:
 # Create instances of books and members using class methods. Register members and add books to the library. 
 # Lend books to members and display the state of the library before and after lending.
+
+"Poi lo faccio"
+
 
 # Exercise 4: University Management System
 
