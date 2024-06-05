@@ -53,6 +53,14 @@ class Rettangle(Shape):
         return (self.width + self.heigh) * 2
     
 
+r = Rettangle(2,3)
+print("area rett: ",r.area())
+print("perim rett: ",r.perimeter())
+r = Circle(3)
+print("area rett: ",r.area())
+print("perim rett: ",r.perimeter())
+    
+
 # Create a class MathOperations with a static method add that takes two numbers and returns their sum, 
 # and another static method multiply that takes two numbers and returns their product.
 # Exercise 3: Library Management System 
@@ -66,6 +74,9 @@ class MathOperations:
     @staticmethod
     def multiply(n1, n2):
         return n1 * n2
+    
+print("add 2 5: ",MathOperations.add(2,5))
+print("mul 2 5: ",MathOperations.multiply(2,5))
 
 
 # Create a Book class containing the following attributes: title, author, isbn
@@ -85,7 +96,7 @@ class Book:
         self.borrowed = False
 
     @classmethod
-    def from_string(cls, book_str: str) -> Book:
+    def from_string(cls, book_str: str) -> object:
         parameters = [param.strip() for param in book_str.split(",")]
         if len(parameters) != 2:
             print("Wrong string format")
@@ -208,7 +219,17 @@ class Library:
 # Create instances of books and members using class methods. Register members and add books to the library. 
 # Lend books to members and display the state of the library before and after lending.
 
-"Poi lo faccio"
+b1 = Book("ciao", "luca", 123)
+b2 = Book("bella", "gino", 321)
+m1 = Member("caio", 11)
+m2 = Member("tizio", 22)
+l = Library([b2],[m2])
+l.add_book(b1)
+l.register_member(m1)
+print(l)
+l.remove_book(b2)
+print(l)
+print(Library.library_statistics())
 
 
 # Exercise 4: University Management System
@@ -255,7 +276,7 @@ class Person(ABC):
 
 class Student(Person):
 
-    def __init__(self, name: str, age: int, student_id: str, courses: list[Course]) -> None:
+    def __init__(self, name: str, age: int, student_id: str, courses: list[object]) -> None:
         super().__init__(name, age)
         self.student_id = student_id
         self.courses = []
@@ -265,14 +286,14 @@ class Student(Person):
     def get_role(self) -> str:
         return("Student")
 
-    def enroll(self, course: Course) -> None:
+    def enroll(self, course: object) -> None:
         if course not in self.courses:
             self.courses.append(course)
 
 
 class Professor(Person):
 
-    def __init__(self, name: str, age: int, professor_id: str, department: str, courses: list[Course]) -> None:
+    def __init__(self, name: str, age: int, professor_id: str, department: str, courses: list[object]) -> None:
         super().__init__(name, age)
         self.professor_id = professor_id
         self.department = department
@@ -280,7 +301,7 @@ class Professor(Person):
         if courses and courses != []:
             self.courses = courses
 
-    def assign_to_course(self, course: Course):
+    def assign_to_course(self, course: object):
         if course not in self.courses:
             self.courses.append(course)
 
