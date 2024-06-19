@@ -1,5 +1,5 @@
-from Dottore import Dottore
-from Paziente import Paziente
+from .Dottore import Dottore
+from .Paziente import Paziente
 
 class Fattura:
 
@@ -9,7 +9,9 @@ class Fattura:
         if doctor.isAValidDoctor():
             self.fatture: int = len(patient)
             self.salary: int = 0
-            self.patient: list[Paziente] = patient
+            self.patient: list[Paziente] = []
+            if patient != None:
+                self.patient = patient
             self.doctor: Dottore = doctor
 
         else:
@@ -43,9 +45,10 @@ class Fattura:
 
 
     def removePatient(self, idCode):
-
+        print("idCode: ",idCode)
         for paziente in self.patient:
-            if paziente.getidCode == idCode:
+            print("paziente: ",paziente.getidCode()) 
+            if paziente.getidCode() == idCode:
                 self.patient.remove(paziente)
                 self.getFatture()
                 self.getSalary()
