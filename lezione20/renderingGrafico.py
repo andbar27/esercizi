@@ -68,53 +68,50 @@ class Triangolo(Forma):
         return (self.base * self.altezza) / 2
     
     # DA FINIRE, TRIANGOLO CON LATI DIVERSI
-    # def render(self):
+    def render(self):
         
-    #     print(f"Ecco un {self.tipo} di base {self.base} e altezza {self.altezza}!")
-
-    #     base = self.base
-    #     altezza = self.altezza
-    #     base2 = self.base
-    #     if base > altezza:
-    #         temp = altezza
-    #         altezza = base
-    #         base = temp
-    #         base2 = base
-
-
-    #     for i in range(altezza):
-    #         res = base - base2 + 1
-    #         res = int(i / (altezza - 1) * base) + 1 
-    #         if res < 0: res = 0
-    #         for j in range(res):
-    #             #print(f"sb: {base}  -  b: {base2}", end="   ")
-    #             sep = " "
-    #             if i == 0 or i == altezza - 1 or j == 0 or j == res - 2:
-    #                 sep = "*"
-
-    #             print(f"{sep}", end=" ")
-
-    #         base2 -= 1
-    #         print()
-
-
-    def render(self) -> None:
-
         print(f"Ecco un {self.tipo} di base {self.base} e altezza {self.altezza}!")
+
         base = self.base
+        altezza = self.altezza
+        base2 = self.base 
+        if base < altezza:
+            temp = altezza
+            altezza = base
+            base = temp
+            base2 = base
 
-        for i in range(self.altezza):
-
-            for j in range(self.base - base + 1):
-
+        for i in range(altezza):
+            res = base - base2 + 1
+            for j in range(res):
+                #print(f"sb: {base}  -  b: {base2}", end="   ")
                 sep = " "
-                if i == 0 or i == self.altezza -1 or j == 0 or j == self.base - base:
+                if i == 0 or i == altezza - 1 or j == 0 or j == res - 1:
                     sep = "*"
 
                 print(f"{sep}", end=" ")
-            
-            base -= 1
+
+            base2 -= 1
             print()
+
+
+    # def render(self) -> None:
+
+    #     print(f"Ecco un {self.tipo} di base {self.base} e altezza {self.altezza}!")
+    #     base = self.base
+
+    #     for i in range(self.altezza):
+
+    #         for j in range(self.base - base + 1):
+
+    #             sep = " "
+    #             if i == 0 or i == self.altezza -1 or j == 0 or j == self.base - base:
+    #                 sep = "*"
+
+    #             print(f"{sep}", end=" ")
+            
+    #         base -= 1
+    #         print()
                     
     
 
@@ -128,6 +125,6 @@ q.render()
 q.getArea()
 
 print()
-t = Triangolo(60)
+t = Triangolo(3)
 t.render()
 t.getArea()
