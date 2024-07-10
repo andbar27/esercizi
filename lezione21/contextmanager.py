@@ -25,7 +25,7 @@ class DatabaseConnection:
 
 
 class DataBaseContextManager:
-
+    #   Eseguite subito dopo il with
     def __init__(self, db_name) -> None:
         self.db = DatabaseConnection(db_name)
 
@@ -33,7 +33,7 @@ class DataBaseContextManager:
     def __enter__(self):
         self.db.connect()
 
-    
+    #   Eseguita subito prima della fine del with
     def __exit__(self, exception_type, exception_value, traceback):
          
         if exception_type is not None:
