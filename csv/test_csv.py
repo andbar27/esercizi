@@ -1,28 +1,29 @@
 import csv
 
-with open("./prova.csv", newline="", encoding="ISO-8859-1") as filecsv:
-    lettore = csv.reader(filecsv,delimiter=";")
+def fromCSVtoLISTofDICT(csv_path: str) -> list[dict]:
+    with open(csv_path, newline="", encoding="ISO-8859-1") as filecsv:
+        lettore = csv.reader(filecsv,delimiter=",")
 
-    f_key: bool = False
-    dict_key: list[str] = []
-    key = []
-    list_dict: list[dict] = []
+        flag_key = True
+        dict_keys = []
 
-    for header in lettore:
-        header = header.__str__().split(",")
-        print(header)
-        if not f_key:
-            f_key = True
-            key = [h.strip() for h in header]
-            continue
+        list_dict = []
 
-        current_dict: dict = {}
-        for key, value in dict_key, header:
-            current_dict[key] = value
-        list_dict += current_dict
-        print(current_dict)
+        for header in lettore:
+            current_dict = {}
+            
+            if flag_key:
+                dict_keys = [h for h in header]
+                flag_key = False
+                continue
 
-    print("\n\nLISTA:", list_dict)
+            for i in range(len(dict_keys)):
+                current_dict[dict_keys[i]] = header[i]
 
+            list_dict.append(current_dict)
+
+    return list_dict
+
+print(fromCSVtoLISTofDICT("./prova.csv"))
 
 # return lista dict {title: str, author: str, book_id: str, url: str} 
