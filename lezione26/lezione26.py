@@ -51,8 +51,8 @@ class CifratoreACombinazione(CodificatoreMessaggio, DecodificatoreMessaggio):
     def combinazione(testoInChiaro: str) -> str:
         lenght = len(testoInChiaro)
         half_len = lenght // 2
-        even = lenght % 2
-        if even:  half_len += 1
+        odd = lenght % 2
+        if odd:  half_len += 1
 
         first_half = testoInChiaro[:half_len]
         second_half = testoInChiaro[half_len:]
@@ -61,7 +61,7 @@ class CifratoreACombinazione(CodificatoreMessaggio, DecodificatoreMessaggio):
         for i in range(lenght // 2):
             testoCodificato += first_half[i] + second_half[i]
 
-        if even: 
+        if odd: 
             testoCodificato += first_half[-1]
 
         return testoCodificato
@@ -75,7 +75,7 @@ class CifratoreACombinazione(CodificatoreMessaggio, DecodificatoreMessaggio):
         second_half = ""
         for i in range(lenght):
 
-            if i % 2:   #even
+            if i % 2:   #odd
                 second_half += testoCifrato[i]
             
             else:
