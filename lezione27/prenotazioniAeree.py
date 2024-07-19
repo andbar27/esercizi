@@ -49,8 +49,8 @@ class VoloCommerciale(Volo):
             res = __prenota(self.posti_economica - self.prenotazioni_economica, posti)
 
             if res != -1:
-                self.prenotazioni_economica = res
-                self.prenotazione -= posti
+                self.prenotazioni_economica += posti 
+                self.prenotazione += posti
                 print(f"Riservati {posti} posti per il Volo {self.codiceVolo}")
             else:
                 print(f"{posti} posti in economica non disponibili per Volo {self.codiceVolo}")
@@ -61,8 +61,8 @@ class VoloCommerciale(Volo):
             res = __prenota(self.posti_business - self.prenotazioni_business, posti)
 
             if res != -1:
-                self.prenotazioni_business = res
-                self.prenotazione -= posti
+                self.prenotazioni_business += posti
+                self.prenotazione += posti
                 print(f"Riservati {posti} posti per il Volo {self.codiceVolo}")
             else:
                 print(f"{posti} posti in business non disponibili per Volo {self.codiceVolo}")
@@ -72,8 +72,8 @@ class VoloCommerciale(Volo):
             res = __prenota(self.posti_prima - self.prenotazioni_prima, posti)
 
             if res != -1:
-                self.prenotazioni_prima = res
-                self.prenotazione -= posti
+                self.prenotazioni_prima += posti
+                self.prenotazione += posti
                 print(f"Riservati {posti} posti per il Volo {self.codiceVolo}")
             else:
                 print(f"{posti} posti in prima non disponibili per Volo {self.codiceVolo}")
@@ -92,7 +92,7 @@ class VoloCommerciale(Volo):
     
 
     def __str__(self) -> str:
-        print(f"Volo Commerciale n° {self.codiceVolo}")
+        return f"Volo Commerciale n° {self.codiceVolo}"
 
 
 
@@ -148,8 +148,32 @@ class CompagniaAerea:
             tot += round(volo.prenotazioni_prima * prezzo * 3, 2)
             return tot
 
-        guadagno_totale: float
+        guadagno_totale: float = 0
         for v in self.flotta:
             guadagno_totale += _guadagno_volo(v, self.prezzo)
 
         return guadagno_totale
+
+
+
+with open("report.txt", "w") as f:
+    v1 = VoloCommerciale("AA1", 100)
+    v2 = VoloCommerciale("AA2", 10)
+    print(v1,"\n",v1.posti_disponibili())
+    print(v2,"\n",v2.posti_disponibili())
+    ca = CompagniaAerea("ryan", 10)
+    ca.aggiungi_volo(v1)
+    ca.aggiungi_volo(v2)
+
+    v1.prenota_posto(70, "economica")
+    print("Guadagno", ca.guadagno())
+
+    print(v1,"\n",v1.posti_disponibili())
+
+    v2.prenota_posto(1,"prima")
+    v2.prenota_posto(2,"business")
+    v2.prenota_posto(3,"economica")
+
+
+    ca.mostra_flotta()
+    print("Guadagno", ca.guadagno())

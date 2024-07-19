@@ -1,0 +1,15 @@
+Volo Commerciale n° AA1 
+ {'posti_disponibili': 100, 'classe_economica': 70, 'classe_business': 20, 'classe_prima': 10}
+Volo Commerciale n° AA2 
+ {'posti_disponibili': 10, 'classe_economica': 7, 'classe_business': 2, 'classe_prima': 1}
+Riservati 70 posti per il Volo AA1
+Guadagno 700
+Volo Commerciale n° AA1 
+ {'posti_disponibili': 30, 'classe_economica': 0, 'classe_business': 20, 'classe_prima': 10}
+Riservati 1 posti per il Volo AA2
+Riservati 2 posti per il Volo AA2
+Riservati 3 posti per il Volo AA2
+Flotta: 
+Volo Commerciale n° AA1
+Volo Commerciale n° AA2
+Guadagno 800
