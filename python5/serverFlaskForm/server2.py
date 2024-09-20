@@ -23,6 +23,7 @@ def login():
         u_req.append(request.args.get('username'))
         u_req.append(request.args.get('password'))
         u_req.append(request.args.get('sex'))
+        u_req.append(0)
         if u_req[2] == "1":
             u_req[2] = 'M'
         elif u_req[2] == '2':
@@ -31,7 +32,7 @@ def login():
             u_req[2] = 'N'
     print(u_req[:3], " - ", utenti[0][:3])
     for u in utenti:
-        if u_req[:3] == u[:3]:
+        if u_req == u:
             u[3] = 1
             return render_template('reg_ok.html')
             
@@ -55,10 +56,20 @@ def login1():
                 temp = ' è un maschio'
             else:
                 temp = ' è una femmina'
-            render_str = "<html><body>"+ u[0] + temp +"</body></html>"
-            return render_str
+            
+            return render_template('user.html')
             
     return render_template('reg_ko.html')
+
+
+@api.route('/ordiniAttuali', methods=['GET'])
+def ordiniAttuali():
+    return render_template('ordini-attuali.html')
+
+@api.route('/ordiniPassati', methods=['GET'])
+def ordiniPassati():
+    return render_template('ordini-passati.html')
+
 
 
 api.run(host='0.0.0.0', port=8085)
