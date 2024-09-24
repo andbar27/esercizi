@@ -38,6 +38,7 @@ def DeserializzaLista(sVar) -> list:
     return retList
 
 
+print(str(mylist_2))
 print(SerializzaLista(mylist_2))
 print(DeserializzaLista(mylist_1))
 print(DeserializzaLista(SerializzaLista(mylist_2)))
