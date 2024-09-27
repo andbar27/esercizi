@@ -3,7 +3,7 @@ import json
 def SerializzaJson(in_dict, file_path) -> bool:
     try:
         f = open(file_path, 'w')
-        json.dump(in_dict, f, indent=6)
+        json.dump(in_dict, f)
         f.close()
         return True
     
