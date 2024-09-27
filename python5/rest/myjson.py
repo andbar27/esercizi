@@ -6,7 +6,7 @@ import sys
 def SerializeJson(in_dict, file_path) -> bool:
     try:
         f = open(file_path, 'w')
-        json.dump(in_dict, f)
+        json.dump(in_dict, f, indent=6)
         f.close()
         return True
     
