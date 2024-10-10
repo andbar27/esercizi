@@ -1,0 +1,18 @@
+{
+    "admincomune@comunezagarolo.it": {
+        "password": "root01",
+        "privilegi": "w",
+        "note": "amministratore del sistema"
+    },
+    "mariorossi@comunezagarolo.it": {
+        "password": "mario01",
+        "privilegi": "w",
+        "note": "sportello frazione 1"
+    },
+    "gianni@gmail.com": {
+        "password": "gianni123",
+        "privilegi": "r",
+        "note": "sportello frazione 2"
+    }
+    
+}
