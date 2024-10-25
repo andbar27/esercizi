@@ -94,7 +94,7 @@ def read_cittadino(codice_fiscale, user, pw):
     content_type = request.headers.get('Content-Type')
     print(f"{codice_fiscale} - {user} - {pw}")
 
-    sQuery = f"select privilegi from utenti where email='{user}' and password='{pw}'"
+    sQuery = f"select privilegi from utenti where email='{user}' and password='{pw}';"
     iNumRows = db.read_in_db(cur, sQuery)
     if iNumRows == 0:
         priv = None

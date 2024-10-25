@@ -60,8 +60,8 @@ def write_in_db(cur,sql_insert):
             print("Duplicate key, vado avanti")
             conn.rollback()
             return -2
-        cur = None
-        conn = None
+        #cur = None
+        #conn = None
         print(sError)
         return -1
 
