@@ -18,6 +18,23 @@ def GetDatiCittadino():
     }
     return datiCittadino
 
+def updateDatiCittadino():
+    cf_old = input("inserisci vecchio codice fiscale: ")
+    nome = input("Inserisci il nome: ")
+    cognome = input("Inserisci il cognome: ")
+    dataN = input("Inserisci la data di nascita (aaaa-mm-dd): ")
+    codF = input("Inserisci il codice fiscale: ")
+    datiCittadino = {
+        "nome": nome, 
+        "cognome": cognome, 
+        "dataNascita": dataN, 
+        "codFiscale": codF,
+        "username": sUsername,
+        "password": sPassword,
+        "cf_old": cf_old
+    }
+    return datiCittadino
+
 
 def GetCodicefiscale():
     cod = input('Inserisci codice fiscale: ')
@@ -59,10 +76,13 @@ def EffettuaPrimoLogin():
     #componi jsonRequest
     jsonRequest = {"username": sUsername, "password":sPassword}
 
+    iPrimoLoginEffettuato = 0
+
     try:
         #manda i dati al server
         api_url = base_url + "/login"
         response = requests.post(api_url,json=jsonRequest)
+        
         
         #processa la risposta del server
         if response.status_code==200:
@@ -71,7 +91,8 @@ def EffettuaPrimoLogin():
                 sPrivilegio = jsonResponse["Privilegio"]
                 iPrimoLoginEffettuato = 1
     except:
-        print("Attenzione, problemi di comunicazione con il server")
+        print("Attenzione, problemi di comunicazione con il server\n")
+    print(response.json(), "\n")
 
 
 print("Benvenuti al Comune - sede locale")
@@ -80,7 +101,7 @@ sPassword = ""
 sPrivilegio = ""
 iPrimoLoginEffettuato = 0 
 while iPrimoLoginEffettuato == 0:
-    iPrimoLoginEffettuato = EffettuaPrimoLogin()
+    EffettuaPrimoLogin()
 
 iFlag = 0
 while iFlag==0:
@@ -115,7 +136,7 @@ while iFlag==0:
     elif iOper == 3:
         print("Modifica cittadino")
         api_url = base_url + "/update_cittadino"
-        jsonDataRequest = GetDatiCittadino()
+        jsonDataRequest = updateDatiCittadino()
         EseguiOperazione(3, api_url, jsonDataRequest)
 
 
