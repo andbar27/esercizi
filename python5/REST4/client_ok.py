@@ -96,7 +96,7 @@ def EffettuaPrimoLogin():
 
 
 print("Benvenuti al Comune - sede locale")
-sUsername=""
+sUsername= ""
 sPassword = ""
 sPrivilegio = ""
 iPrimoLoginEffettuato = 0 

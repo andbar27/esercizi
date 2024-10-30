@@ -18,6 +18,8 @@ if cur is None:
 
 # file_path_users = "utenti.json"
 # utenti = JsonDeserialize(file_path_users)
+
+
 def verificaCredenziali(jsonReq, cur):
     user = jsonReq.get('username')
     pw = jsonReq.get('password')
@@ -48,6 +50,8 @@ def GestisciLogin():
         return jsonify({"Esito": "002", "Msg": "Formato richiesta errato"}) 
                                              
 
+
+
 @api.route('/add_cittadino', methods=['POST'])
 def GestisciAddCittadino():
     global cur
@@ -55,7 +59,6 @@ def GestisciAddCittadino():
     if content_type == 'application/json':
         jsonReq = request.json
         
-
         priv = verificaCredenziali(jsonReq, cur)
         if priv == None:
             return jsonify({"Esito": "001", "Msg": "Credenziali errate"})
@@ -69,7 +72,6 @@ def GestisciAddCittadino():
         if iNumRows != 0:
             return jsonify({"Esito": "001", "Msg": "Cittadino già esistente"}), 200
         
-
         elif priv == 'w':
             sQuery = f"INSERT INTO Anagrafe (codice_fiscale, nome, cognome, data_nascita) \
             VALUES \
@@ -82,6 +84,7 @@ def GestisciAddCittadino():
             print("privilegio non disponibile")
             return jsonify({"Esito": "002", "Msg": "Privilegio non disponibile"}), 200
         
+
     else:
         return jsonify({"Esito": "002", "Msg": "Formato richiesta non valido"}), 200
 
@@ -100,7 +103,6 @@ def read_cittadino(codice_fiscale, user, pw):
         priv = None
     else:
         priv = db.read_next_row(cur)[1][0]
-
 
     if priv == None:
         return jsonify({"Esito": "001", "Msg": "Credenziali errate"})
