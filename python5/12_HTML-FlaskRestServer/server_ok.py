@@ -117,6 +117,8 @@ def read_cittadino(codice_fiscale, user, pw):
             print(cittadino)
         else:
             cittadino = None
+    else:
+        return jsonify({"Esito": "002", "Msg": "Privilegio non disponibile"}), 200
 
     if cittadino:
         return jsonify({"Esito": "000", "Msg": "Cittadino trovato", "Dati": cittadino}), 200
@@ -166,7 +168,8 @@ def update_cittadino():
                 print(sQuery)
                 db.write_in_db(cur, sQuery)
                 return jsonify({"Esito": "000", "Msg": "Cittadino aggiornato con successo"}), 200
-
+        else:
+            return jsonify({"Esito": "002", "Msg": "Privilegio non disponibile"}), 200
     else:
         return jsonify({"Esito": "002", "Msg": "Formato richiesta non valido"}), 200
 
@@ -188,7 +191,7 @@ def elimina_cittadino():
 
 
         codice_fiscale = jsonReq.get('codFiscale')
-        if priv in "wr":
+        if priv in "w":
             sQuery = "select * from anagrafe where codice_fiscale='" + codice_fiscale + "';"
             print(sQuery)
             iNumRows = db.read_in_db(cur, sQuery)
@@ -200,6 +203,7 @@ def elimina_cittadino():
                 print(sQuery)
                 db.write_in_db(cur, sQuery)
                 return jsonify({"Esito": "000", "Msg": "Cittadino rimosso con successo"}), 200
-
+        else:
+            return jsonify({"Esito": "002", "Msg": "Privilegio non disponibile"}), 200
 api.run(host="127.0.0.1", port=8080)
 

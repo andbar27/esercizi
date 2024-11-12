@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Form Edit Citizen</title>
+        </title>
+    </head>
+    <body>
+        <h2>Edit Citizen</h2>
+        <form action="/r_edit_cit" method="POST">
+            <label for="old_codFiscale">Vecchio Codice Fiscale:</label><br>
+            <input type="text" id="old_codFiscale" name="old_codFiscale" required><br><br>
+
+            
+            <label for="nome">Nome:</label><br>
+            <input type="text" id="nome" name="nome" required><br><br>
+
+            <label for="cognome">Cognome:</label><br>
+            <input type="text" id="cognome" name="cognome" required><br><br>
+
+            <label for="data_nascita">Data Nascita: (aaaa-mm-gg)</label><br>
+            <input type="text" id="data_nascita" name="data_nascita" required><br><br>
+
+            <label for="codFiscale">Codice Fiscale:</label><br>
+            <input type="text" id="codFiscale" name="codFiscale" required><br><br>
+
+            <input type="submit" value="inserisci">
+        </form>
+    </body>
+</html>
