@@ -22,8 +22,17 @@ def EseguiOperazione(iOper, api_url, jsonDataRequest):
 
 
 def getQuery() -> str :
-    return {"query": input("Inserisci Query: ")}
+    query = input("Inserisci Query (';' per terminare): \n")
+    while query[-1] != ';':
+        query = query + "\n" + input()
+    print(query)
+    return {"query": query}
 
+"""
+"INSERT INTO Anagrafe (codice_fiscale, nome, cognome, data_nascita) 
+    VALUES ('f', 'f', 
+    'f', '2000-01-01');"
+"""
 
 
 
