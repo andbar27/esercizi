@@ -1,27 +1,38 @@
-<html>
-    <head>
-        <title>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Form Insert Citizen</title>
-        </title>
-    </head>
-    <body>
-        <h2>Insert Citizen</h2>
-        <form action="/r_insert_cit" method="POST">
-            <label for="nome">Nome:</label><br>
-            <input type="text" id="nome" name="nome" required><br><br>
-
-            <label for="cognome">Cognome:</label><br>
-            <input type="text" id="cognome" name="cognome" required><br><br>
-
-            <label for="data_nascita">Data Nascita: (aaaa-mm-gg)</label><br>
-            <input type="text" id="data_nascita" name="data_nascita" required><br><br>
-
-            <label for="codFiscale">Codice Fiscale:</label><br>
-            <input type="text" id="codFiscale" name="codFiscale" required><br><br>
-
-            <input type="submit" value="inserisci">
-        </form>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Citizen</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card shadow p-4" style="width: 100%; max-width: 500px;">
+            <h2 class="text-center mb-4">Insert Citizen</h2>
+            <form action="/r_insert_cit" method="POST">
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" id="nome" name="nome" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="cognome" class="form-label">Cognome</label>
+                    <input type="text" id="cognome" name="cognome" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="data_nascita" class="form-label">Data Nascita</label>
+                    <input type="date" id="data_nascita" name="data_nascita" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="codFiscale" class="form-label">Codice Fiscale</label>
+                    <input type="text" id="codFiscale" name="codFiscale" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Inserisci</button>
+            </form>
+        </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

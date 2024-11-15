@@ -9,19 +9,8 @@ api = Flask(__name__)
 
 
 def responseHTML(jsonField):
-    return f"""
-<html>
-<head>
-    <title>
-        Response
-    </title>
-</head>
-<body>
-{jsonField}
-<br>
-<a href="/select_operation">Ritorna a Seleziona Operazione</a> <br>
-</body>
-"""
+    return render_template('response.html', jsonField=json.dumps(jsonField, indent=4))
+
 
 @api.route('/', methods=['GET'])
 def index():
@@ -158,6 +147,7 @@ def updateDatiCittadino():
 
 
 def GetCodicefiscale():
+    global sUsername, sPassword, sPrivilegio
     if request.method == 'GET':
         cod = request.args.get('codFiscale')
     else:
@@ -187,69 +177,6 @@ def EseguiOperazione(iOper, sServizio, dDatiToSend):
             return "Attenzione, errore " + str(response.status_code)
     except:
         return "Problemi di comunicazione con il server, riprova più tardi."
-
-
-
-"""
-print("Benvenuti al Comune - sede locale")
-sUsername= ""
-sPassword = ""
-sPrivilegio = ""
-iPrimoLoginEffettuato = 0 
-while iPrimoLoginEffettuato == 0:
-    EffettuaPrimoLogin()
-
-iFlag = 0
-while iFlag==0:
-    print("\nOperazioni disponibili:")
-    print("1. Inserisci cittadino")
-    print("2. Richiedi cittadino")
-    print("3. Modifica cittadino")
-    print("4. Elimina cittadino")
-    print("5. Esci")
-
-
-    try:
-        iOper = int(input("Cosa vuoi fare? "))
-    except ValueError:
-        print("Inserisci un numero valido!")
-        continue
-
-
-    if iOper == 1:
-        print("Aggiunta cittadino")
-        api_url = base_url + "/add_cittadino"
-        jsonDataRequest = GetDatiCittadino()
-        EseguiOperazione(1, api_url, jsonDataRequest)
-
-    # Richiesta dati cittadino
-    elif iOper == 2:
-        print("Richiesta dati cittadino")
-        api_url = base_url + "/read_cittadino"
-        jsonDataRequest = GetCodicefiscale()
-        EseguiOperazione(2, api_url + "/" + jsonDataRequest['codFiscale'] + "/" + jsonDataRequest['username'] + "/" + jsonDataRequest['password'],None)
-
-    elif iOper == 3:
-        print("Modifica cittadino")
-        api_url = base_url + "/update_cittadino"
-        jsonDataRequest = updateDatiCittadino()
-        EseguiOperazione(3, api_url, jsonDataRequest)
-
-
-    elif iOper == 4:
-        print("Eliminazione cittadino")
-        api_url = base_url + "/elimina_cittadino"
-        jsonDataRequest = GetCodicefiscale()
-        EseguiOperazione(4, api_url, jsonDataRequest)
-
-    elif iOper == 5:
-        print("Buona giornata!")
-        iFlag = 1
-
-    else:
-        print("Operazione non disponibile, riprova.")
-
-"""
 
 
 api.run(host='0.0.0.0', port=8085)

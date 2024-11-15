@@ -1,16 +1,26 @@
-<html>
-    <head>
-        <title>
-            Select Operation
-        </title>
-    </head>
-    <body>
-        Seleziona Operazione: <br>
-        <a href="/insert_cit">Insert Citizen</a> <br>
-        <a href="/view_cit">View Citizen</a> <br>
-        <a href="/edit_cit">Edit Citizen</a> <br>
-        <a href="/delete_cit">Delete Citizen</a> <br>
-        <br>
-        <a href="/">Login</a> <br>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Operation</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card shadow p-4 text-center" style="width: 100%; max-width: 400px;">
+            <h2 class="mb-4">Seleziona Operazione</h2>
+            <div class="d-grid gap-3">
+                <a href="/insert_cit" class="btn btn-outline-primary">Insert Citizen</a>
+                <a href="/view_cit" class="btn btn-outline-secondary">View Citizen</a>
+                <a href="/edit_cit" class="btn btn-outline-success">Edit Citizen</a>
+                <a href="/delete_cit" class="btn btn-outline-danger">Delete Citizen</a>
+                <a href="/" class="btn btn-outline-dark mt-3">Login</a>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
