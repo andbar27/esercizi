@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cerca Vendita</title>
+    </head>
+
+
+    <body>
+        <h1>Cerca case in Vendita</h1>
+
+        <form action="/res_vendita" method="post">
+            <h2>Cerca</h2><br>
+            <label for="indirizzo">Indirizzo:</label><br>
+            <input type="text" id="indirizzo" name="indirizzo"><br><br>
+
+            <label for="prezzo">Prezzo €:</label><br>
+            <input type="number" id="prezzo" name="prezzo" value="0"><br><br>
+        
+            <label for="metri">Metri:</label><br>
+            <input type="number" id="metri" name="metri" value="0"><br><br>
+
+            <label for="stanze">Numero Stanze:</label><br>
+            <input type="number" id="stanze" name="stanze" value="0"><br><br>
+
+            <div class="radio-group">
+                <label>Tipo</label>
+                <label><input type="radio" name="stato" value="LIBERO" required> Libero</label>
+                <label><input type="radio" name="stato" value="OCCUPATO" required> Occupato</label>
+            </div>
+
+            <button type="submit">Cerca Immobile</button>
+        </form>
+    </body>
+</html>
+
+

@@ -205,5 +205,7 @@ def elimina_cittadino():
                 return jsonify({"Esito": "000", "Msg": "Cittadino rimosso con successo"}), 200
         else:
             return jsonify({"Esito": "002", "Msg": "Privilegio non disponibile"}), 200
+
+
 api.run(host="127.0.0.1", port=8080)
 

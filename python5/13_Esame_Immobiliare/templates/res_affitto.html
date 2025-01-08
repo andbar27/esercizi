@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>IS_Immobiliare</title>
+    </head>
+
+
+    <body>
+        <h1>Risultati</h1>
+        {% if res_data %}
+            <h2>Risultato:</h2>
+            <ul>
+                {% for item in res_data %}
+                    <li>{{ item }}</li>  <!-- Ogni elemento della lista in un <li> -->
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Nessun risultato trovato o errore nella comunicazione.</p>
+        {% endif %}
+        <br><br>
+        <a href="/">Home</a>
+    </body>
+</html>

@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cerca Affitto</title>
+    </head>
+
+
+    <body>
+        <h1>Cerca case in Affitto</h1>
+
+        <form action="/res_affitto" method="post">
+            <h2>Cerca</h2><br>
+            <label for="indirizzo">Indirizzo:</label><br>
+            <input type="text" id="indirizzo" name="indirizzo"><br><br>
+
+            <label for="prezzo">Prezzo €:</label><br>
+            <input type="number" id="prezzo" name="prezzo" value="0"><br><br>
+        
+            <div class="radio-group">
+                <label>Bagno personale</label>
+                <label><input type="radio" name="bagno" value="True"> Si</label>
+                <label><input type="radio" name="bagno" value="False"> No</label>
+            </div>
+        
+            <div class="radio-group">
+                <label>Tipo</label>
+                <label><input type="radio" name="stato" value="PARZIALE" required> Parziale</label>
+                <label><input type="radio" name="stato" value="TOTALE" required> Totale</label>
+            </div>
+
+            <button type="submit">Cerca Immobile</button>
+        </form>
+    </body>
+</html>
+
+
